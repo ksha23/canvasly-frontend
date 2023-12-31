@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Modal from "./SuccessPopup";
 
@@ -8,11 +8,13 @@ import { setCalendarId } from "../redux/actions/userActions";
 
 const SettingsForm = ({ calendarData, userData }) => {
   // ------------------ Form State ----------------------
-  const [calendarId, setTheCalendarId] = useState(userData.calendarId);
-  const [dueDateWeight, setDueDateWeight] = useState(userData.dueDateWeight);
-  const [typeWeight, setTypeWeight] = useState(userData.typeWeight);
+  const [calendarId, setTheCalendarId] = useState(userData?.calendarId || "");
+  const [dueDateWeight, setDueDateWeight] = useState(
+    userData?.dueDateWeight || ""
+  );
+  const [typeWeight, setTypeWeight] = useState(userData?.typeWeight || "");
   const [difficultyWeight, setDifficultyWeight] = useState(
-    userData.difficultyWeight
+    userData?.difficultyWeight || ""
   );
   const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -70,18 +72,26 @@ const SettingsForm = ({ calendarData, userData }) => {
 
   // ------------------ Render ----------------------
 
+  useEffect(() => {
+    if (!userData) return;
+    setTheCalendarId(userData.calendarId || "");
+    setDueDateWeight(userData.dueDateWeight || "");
+    setTypeWeight(userData.typeWeight || "");
+    setDifficultyWeight(userData.difficultyWeight || "");
+  }, [userData]);
+
   return (
     <div>
       {userData && calendarData && (
-        <div class="rounded-md">
+        <div className="rounded-md">
           <form onSubmit={handleSubmit}>
-            <p class="mb-2 font-semibold">
+            <p className="mb-2 font-semibold">
               Choose a calendar to display events from:
             </p>
 
             {calendarData && (
               <select
-                class="block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 mb-4 border border-gray-200 px-2 py-2 dark:dark:bg-zinc-600"
+                className="block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 mb-4 border border-gray-200 px-2 py-2 dark:dark:bg-zinc-600"
                 name="calendars"
                 id="calendars"
                 value={calendarId}
@@ -96,7 +106,7 @@ const SettingsForm = ({ calendarData, userData }) => {
               </select>
             )}
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label className="font-semibold" htmlFor="dueDateWeight">
                   Weight for due date:
@@ -106,7 +116,7 @@ const SettingsForm = ({ calendarData, userData }) => {
                   type="number"
                   value={dueDateWeight}
                   onChange={(e) => setDueDateWeight(e.target.value)}
-                  class="block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 border border-gray-200 px-2 py-2 mt-2 dark:bg-zinc-600"
+                  className="block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 border border-gray-200 px-2 py-2 mt-2 dark:bg-zinc-600"
                 />
               </div>
 
@@ -119,7 +129,7 @@ const SettingsForm = ({ calendarData, userData }) => {
                   type="number"
                   value={typeWeight}
                   onChange={(e) => setTypeWeight(e.target.value)}
-                  class="block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 border border-gray-200 px-2 py-2 mt-2 dark:bg-zinc-600"
+                  className="block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 border border-gray-200 px-2 py-2 mt-2 dark:bg-zinc-600"
                 />
               </div>
 
@@ -132,7 +142,7 @@ const SettingsForm = ({ calendarData, userData }) => {
                   type="number"
                   value={difficultyWeight}
                   onChange={(e) => setDifficultyWeight(e.target.value)}
-                  class="block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 border border-gray-200 px-2 py-2 mt-2 dark:bg-zinc-600"
+                  className="block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 border border-gray-200 px-2 py-2 mt-2 dark:bg-zinc-600"
                 />
               </div>
               <button
@@ -155,8 +165,8 @@ const SettingsForm = ({ calendarData, userData }) => {
               </button>
             </div>
 
-            {error && <div class="text-red-500">{error}</div>}
-            <button class="mt-4 bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded">
+            {error && <div className="text-red-500">{error}</div>}
+            <button className="mt-4 bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded">
               Save Settings
             </button>
           </form>
