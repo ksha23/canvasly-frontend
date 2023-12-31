@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 
 import Modal from "./SuccessPopup";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setWeights } from "../redux/actions/weightsActions";
 import { setCalendarId } from "../redux/actions/userActions";
 
-const SettingsForm = ({ calendarData, userData }) => {
+const SettingsForm = () => {
   // ------------------ Form State ----------------------
+  let userData = useSelector((state) => state.userDataReducer);
+  let calendarData = useSelector((state) => state.calendarDataReducer);
   const [calendarId, setTheCalendarId] = useState(userData?.calendarId || "");
   const [dueDateWeight, setDueDateWeight] = useState(
     userData?.dueDateWeight || ""

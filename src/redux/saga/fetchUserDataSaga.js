@@ -11,8 +11,8 @@ function* fetchUserDataWorker() {
     }
   );
   data = yield data.json();
-  yield put({ type: SET_USER_DATA, userData: data });
   if (data.user !== null) {
+    yield put({ type: SET_USER_DATA, userData: data });
     yield put({ type: SET_IS_LOGGED_IN, isLoggedIn: true });
   }
 }

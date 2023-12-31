@@ -1,6 +1,5 @@
-import { takeEvery, put } from "redux-saga/effects";
+import { takeEvery } from "redux-saga/effects";
 import { SET_WEIGHTS } from "../constant";
-import { SET_USER_WEIGHTS } from "../constant";
 
 // worker saga
 function* setWeightsWorker(action) {
@@ -17,7 +16,6 @@ function* setWeightsWorker(action) {
     }
   );
   const data = yield response.json();
-  yield put({ type: SET_USER_WEIGHTS, payload: data });
 }
 
 // watcher saga
