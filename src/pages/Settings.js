@@ -28,7 +28,7 @@ const SettingsPage = () => {
       <div className="p-10 max-w-4xl mx-auto text-center">
         <h2 className="text-2xl font-bold mb-4">Settings</h2>
         {userData && calendarData && (
-          <div className="border-2 border-gray-300 p-4 rounded-md">
+          <div className="bg-zinc-800 p-6 rounded-md">
             <SettingsForm calendarData={calendarData} userData={userData} />
           </div>
         )}
