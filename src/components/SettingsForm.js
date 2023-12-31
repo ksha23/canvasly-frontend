@@ -146,18 +146,21 @@ const SettingsForm = ({ calendarData, userData }) => {
                 />
               </div>
               <button
+                type="button"
                 className="bg-indigo-300 hover:bg-indigo-400 text-black py-2 px-4 rounded"
                 onClick={() => handleThemeChange("light")}
               >
                 Light Mode
               </button>
               <button
+                type="button"
                 className="bg-indigo-800 hover:bg-indigo-900 text-white py-2 px-4 rounded"
                 onClick={() => handleThemeChange("dark")}
               >
                 Dark Mode
               </button>
               <button
+                type="button"
                 className="bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded"
                 onClick={() => handleThemeChange("system")}
               >
