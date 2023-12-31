@@ -1,3 +1,5 @@
+// Keeps track of the user's data
+
 import { FETCH_USER_DATA } from "../constant";
 import { SET_USER_DATA } from "../constant";
 import { SET_CALENDAR_ID } from "../constant";

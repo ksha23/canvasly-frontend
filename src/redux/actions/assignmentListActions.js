@@ -1,3 +1,5 @@
+// Keeps track of the assignments in the assignment list
+
 import { GET_ASSIGNMENTS } from "../constant";
 import { COMPLETE_ASSIGNMENT } from "../constant";
 import { UPDATE_ASSIGNMENT_TYPE } from "../constant";
@@ -5,12 +7,14 @@ import { UPDATE_ASSIGNMENT_DIFFICULTY } from "../constant";
 import { ADD_ASSIGNMENT_REMINDER } from "../constant";
 import { UPDATE_ASSIGNMENT_REMINDER_ARRAY } from "../constant";
 
+// get assignments from database and store in redux store
 export const getAssignments = () => {
   return {
     type: GET_ASSIGNMENTS,
   };
 };
 
+// complete assignment
 export const completeAssignment = (id) => {
   return {
     type: COMPLETE_ASSIGNMENT,
@@ -18,6 +22,7 @@ export const completeAssignment = (id) => {
   };
 };
 
+// update assignment type
 export const updateAssignmentType = (id, assignmentType) => {
   return {
     type: UPDATE_ASSIGNMENT_TYPE,
@@ -26,6 +31,7 @@ export const updateAssignmentType = (id, assignmentType) => {
   };
 };
 
+// update assignment difficulty
 export const updateAssignmentDifficulty = (id, difficulty) => {
   return {
     type: UPDATE_ASSIGNMENT_DIFFICULTY,
@@ -34,6 +40,7 @@ export const updateAssignmentDifficulty = (id, difficulty) => {
   };
 };
 
+// add assignment reminder
 export const addAssignmentReminderAction = (id, reminder) => {
   return {
     type: ADD_ASSIGNMENT_REMINDER,
@@ -42,6 +49,7 @@ export const addAssignmentReminderAction = (id, reminder) => {
   };
 };
 
+// update assignment reminder array
 export const updateAssignmentReminderArray = (id, reminders) => {
   return {
     type: UPDATE_ASSIGNMENT_REMINDER_ARRAY,

@@ -1,17 +1,15 @@
-import React from "react";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Link, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { RESET } from "../redux/constant";
-import { useSelector } from "react-redux";
+
+import { useNavigate, Link, useLocation } from "react-router-dom";
+
+import { useDispatch, useSelector } from "react-redux";
+import { RESET, GET_CALENDAR_DATA } from "../redux/constant";
 import { setIsLoggedIn } from "../redux/actions/loginActions";
 import { fetchUserData } from "../redux/actions/userActions";
-import { getAssignments } from "../redux/actions/assignmentListAction";
-import { GET_CALENDAR_DATA } from "../redux/constant";
+import { getAssignments } from "../redux/actions/assignmentListActions";
 
 const Navbar = () => {
-  var userData = useSelector((state) => state.userDataReducer).user;
+  var userData = useSelector((state) => state.userDataReducer);
   var isLoggedIn = useSelector((state) => state.loginStateReducer);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -25,9 +23,13 @@ const Navbar = () => {
     }
   }, [dispatch, isLoggedIn]);
 
+  // ------------------ Navbar ----------------------
+
   const isActiveLink = (pathname) => {
     return location.pathname === pathname ? "font-bold" : "";
   };
+
+  // ------------------ Authentication --------------
 
   async function auth() {
     window.open(`${process.env.REACT_APP_API_URL}/api/v1/auth/google`, "_self");
@@ -41,7 +43,6 @@ const Navbar = () => {
         credentials: "include",
       }
     );
-
     const data = await response.json();
     if (data.message === "Successfully logged out") {
       dispatch(setIsLoggedIn(false));
@@ -111,56 +112,6 @@ const Navbar = () => {
         </div>
       </div>
     </header>
-
-    // <header className="navbar">
-    //   <div className="content-wrapper">
-    //     <div className="combined-section">
-    //       <div className="left-section">
-    //         {/* <img
-    //       className="logo"
-    //       src={process.env.PUBLIC_URL + "/canvasly.png"}
-    //       alt="Canvasly Logo"
-    //     /> */}
-    //         <Link to="/" className={isActiveLink("/")}>
-    //           Home
-    //         </Link>
-    //         <Link to="/assignments" className={isActiveLink("/assignments")}>
-    //           Assignments
-    //         </Link>
-    //         <Link to="/settings" className={isActiveLink("/settings")}>
-    //           Settings
-    //         </Link>
-    //       </div>
-    //       <div className={isLoggedIn ? "right-section" : "right-section-login"}>
-    //         <div className="user-profile">
-    //           {userData && (
-    //             <img
-    //               className="profile-img"
-    //               src={userData.photo}
-    //               alt="Profile"
-    //             />
-    //           )}
-    //         </div>
-    //         <div className="buttons">
-    //           {!isLoggedIn && (
-    //             <button className="login-btn" onClick={() => auth()}>
-    //               <img
-    //                 className="google-image"
-    //                 src={process.env.PUBLIC_URL + "/sign-in2.png"}
-    //                 alt="Sign In"
-    //               />
-    //             </button>
-    //           )}
-    //           {isLoggedIn && (
-    //             <button className="logout-btn" onClick={() => logout()}>
-    //               <strong>Log Out</strong>
-    //             </button>
-    //           )}
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </header>
   );
 };
 

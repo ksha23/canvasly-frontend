@@ -8,7 +8,7 @@ export const userDataReducer = (state = {}, action) => {
     case RESET:
       return {};
     case SET_USER_DATA:
-      return action.userData;
+      return action.userData.user;
     case SET_USER_WEIGHTS:
       const typeWeight = action.payload.typeWeight;
       const difficultyWeight = action.payload.difficultyWeight;

@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import { useState } from "react";
+
+import Modal from "./SuccessPopup";
+
 import { useDispatch } from "react-redux";
 import { setWeights } from "../redux/actions/weightsActions";
 import { setCalendarId } from "../redux/actions/userActions";
-import Modal from "./SuccessPopup";
-import { useState } from "react";
 
 const SettingsForm = ({ calendarData, userData }) => {
+  // ------------------ Form State ----------------------
   const [calendarId, setTheCalendarId] = useState(userData.calendarId);
   const [dueDateWeight, setDueDateWeight] = useState(userData.dueDateWeight);
   const [typeWeight, setTypeWeight] = useState(userData.typeWeight);
@@ -14,7 +16,10 @@ const SettingsForm = ({ calendarData, userData }) => {
   );
   const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false);
+
   const dispatch = useDispatch();
+
+  // ------------------ Color Theme ----------------------
 
   function applyTheme() {
     if (
@@ -27,7 +32,6 @@ const SettingsForm = ({ calendarData, userData }) => {
       document.documentElement.classList.remove("dark");
     }
   }
-
   function handleThemeChange(theme) {
     if (theme === "light") {
       localStorage.theme = "light";
@@ -38,6 +42,8 @@ const SettingsForm = ({ calendarData, userData }) => {
     }
     applyTheme(); // Apply the theme after changing it
   }
+
+  // ------------------ Form ----------------------
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -61,6 +67,8 @@ const SettingsForm = ({ calendarData, userData }) => {
       }, 3000);
     }
   };
+
+  // ------------------ Render ----------------------
 
   return (
     <div>

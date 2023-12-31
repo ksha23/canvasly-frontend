@@ -1,12 +1,12 @@
-import React from "react";
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { completeAssignment } from "../redux/actions/assignmentListAction";
-import { updateAssignmentDifficulty } from "../redux/actions/assignmentListAction";
-import { updateAssignmentType } from "../redux/actions/assignmentListAction";
-import { useSelector } from "react-redux";
-import { addAssignmentReminderAction } from "../redux/actions/assignmentListAction";
-import { updateAssignmentReminderArray } from "../redux/actions/assignmentListAction";
+
+import { useDispatch, useSelector } from "react-redux";
+
+import { completeAssignment } from "../redux/actions/assignmentListActions";
+import { updateAssignmentDifficulty } from "../redux/actions/assignmentListActions";
+import { updateAssignmentType } from "../redux/actions/assignmentListActions";
+import { addAssignmentReminderAction } from "../redux/actions/assignmentListActions";
+import { updateAssignmentReminderArray } from "../redux/actions/assignmentListActions";
 
 const EventComponent = ({
   id,
@@ -19,35 +19,74 @@ const EventComponent = ({
   completedAnEvent,
 }) => {
   const dispatch = useDispatch();
+  const formattedDateTime = new Date(dateTime);
 
+  // ----------------------- State Variables ---------------------------
+
+  // used to determine if the event is edited (add border if edited)
+  const [edited, setEdited] = useState(false);
+  // used to keep track of the difficulty and type of the event that is not necessarily in redux or db (for undoing changes)
+  const [theType, setType] = useState("");
+  const [theDifficulty, setDifficulty] = useState("");
+  // used to keep track of reminders that are not necessarily in redux or db (for undoing changes)
+  const [editedIndex, setEditedIndex] = useState(null);
+  const [showAddReminder, setShowAddReminder] = useState(false);
+  const [newReminderText, setNewReminderText] = useState("");
+  const [editedReminders, setEditedReminders] = useState([...reminders]);
+
+  // ----------------------- Updating Difficulty and Type ---------------------------
+
+  // update assignment difficulty in redux and db
   const changeAssignmentDifficulty = async (id, difficulty) => {
     await dispatch(updateAssignmentDifficulty(id, difficulty));
     await handleEdited(id, assignment.difficulty, type);
   };
-
+  // update assignment type in redux and db
   const changeAssignmentType = async (id, type) => {
     await dispatch(updateAssignmentType(id, type));
     await handleEdited(id, assignment.difficulty, type);
   };
-
+  // update assignment difficulty and type in redux and db
   const changeAssignmentDifficultyAndType = async (id, difficulty, type) => {
     await dispatch(updateAssignmentDifficulty(id, difficulty));
     await dispatch(updateAssignmentType(id, type));
     await handleEdited(id, difficulty, type);
   };
 
+  // ----------------------- Completing an Assignment ---------------------------
+
   const complete = (id) => {
     completedAnEvent();
     dispatch(completeAssignment(id));
   };
 
-  const formattedDateTime = new Date(dateTime);
+  // ------------------------ Updating Reminders in REDUX AND DB --------------------------
+
+  const updateReminder = (index) => {
+    const updatedReminders = [...reminders];
+    updatedReminders[index] = editedReminders[index];
+    dispatch(updateAssignmentReminderArray(id, updatedReminders));
+    setEditedIndex(null); // Reset edited index after update
+  };
+
+  // ----------------------- Removing Reminders in REDUX and DB ---------------------------
+
+  const removeReminder = async (id, index) => {
+    const updatedReminders = [...editedReminders];
+    updatedReminders.splice(index, 1);
+    setEditedReminders(updatedReminders);
+
+    let remindersCopy = [...reminders];
+    remindersCopy.splice(index, 1);
+    dispatch(updateAssignmentReminderArray(id, remindersCopy));
+  };
+
+  // ------------------------ Helper Functions --------------------------
 
   const extractContentInBrackets = (str) => {
     const matches = str.match(/\[(.*?)\]/);
     return matches ? matches[1] : "";
   };
-
   const formatDate = (date) => {
     if (
       Object.prototype.toString.call(date) === "[object Date]" &&
@@ -59,6 +98,8 @@ const EventComponent = ({
     }
   };
 
+  // ------------------------- Event Handlers -------------------------
+
   const handleUpdateButtonClick = async (id, difficulty, type) => {
     if (assignment.difficulty != difficulty && assignment.type != type) {
       await changeAssignmentDifficultyAndType(id, difficulty, type);
@@ -68,7 +109,6 @@ const EventComponent = ({
       await changeAssignmentType(id, type);
     }
   };
-
   const handleEdited = async (id, difficulty, type) => {
     if (assignment.type == type && assignment.difficulty == difficulty) {
       await setEdited(false);
@@ -80,6 +120,21 @@ const EventComponent = ({
     setType(type);
     setDifficulty(difficulty);
   };
+  const handleEditReminder = (index, value) => {
+    const updatedReminders = [...editedReminders];
+    updatedReminders[index] = value;
+    setEditedReminders(updatedReminders);
+  };
+  const handleAddReminder = async () => {
+    const updatedReminders = [...editedReminders];
+    updatedReminders.push(newReminderText);
+    setEditedReminders(updatedReminders);
+    dispatch(addAssignmentReminderAction(id, newReminderText));
+    setNewReminderText("");
+    setShowAddReminder(false);
+  };
+
+  // ------------------------ Undoing Changes --------------------------
 
   const undoAllChanges = async () => {
     await setEdited(false);
@@ -93,46 +148,7 @@ const EventComponent = ({
     );
   };
 
-  const handleEditReminder = (index, value) => {
-    const updatedReminders = [...editedReminders];
-    updatedReminders[index] = value;
-    setEditedReminders(updatedReminders);
-  };
-
-  const updateReminder = (index) => {
-    const updatedReminders = [...reminders];
-    updatedReminders[index] = editedReminders[index];
-    dispatch(updateAssignmentReminderArray(id, updatedReminders));
-    setEditedIndex(null); // Reset edited index after update
-  };
-
-  const removeReminder = async (id, index) => {
-    const updatedReminders = [...editedReminders];
-    updatedReminders.splice(index, 1);
-    setEditedReminders(updatedReminders);
-
-    let remindersCopy = [...reminders];
-    remindersCopy.splice(index, 1);
-    dispatch(updateAssignmentReminderArray(id, remindersCopy)); // FIXME!
-  };
-
-  const handleAddReminder = async () => {
-    const updatedReminders = [...editedReminders];
-    updatedReminders.push(newReminderText);
-    setEditedReminders(updatedReminders);
-    dispatch(addAssignmentReminderAction(id, newReminderText));
-    setNewReminderText("");
-    setShowAddReminder(false);
-  };
-
-  const [theType, setType] = useState("");
-  const [theDifficulty, setDifficulty] = useState("");
-  const [edited, setEdited] = useState(false);
-
-  const [editedIndex, setEditedIndex] = useState(null); // Track the index of edited reminder
-  const [showAddReminder, setShowAddReminder] = useState(false);
-  const [newReminderText, setNewReminderText] = useState("");
-  const [editedReminders, setEditedReminders] = useState([...reminders]); // Initialize edited reminders
+  // ------------------------- Page Load -------------------------
 
   useEffect(() => {
     setType(type);
@@ -143,6 +159,8 @@ const EventComponent = ({
   let assignment = assignments.find((assignment) => assignment._id === id);
   const extractedContent = extractContentInBrackets(name);
   const displayName = extractedContent ? `${extractedContent}: ` : "";
+
+  // ------------------------- Render -------------------------
 
   return (
     <div

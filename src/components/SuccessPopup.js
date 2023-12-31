@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import "./SuccessPopup.css"; // Import your CSS file for styling
 
 const Modal = ({ show, message }) => {

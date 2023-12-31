@@ -1,21 +1,25 @@
 import { useEffect, useState } from "react";
+
 import EventComponent from "../components/Event";
 import Navbar from "../components/Navbar";
-import { useSelector } from "react-redux";
-import { getAssignments } from "../redux/actions/assignmentListAction";
-import { useDispatch } from "react-redux";
 import Confetti from "react-confetti";
+
+import { useSelector, useDispatch } from "react-redux";
+import { getAssignments } from "../redux/actions/assignmentListActions";
 import { fetchUserData } from "../redux/actions/userActions";
 import { getSortedAssignments } from "../redux/selectors/assignmentListSelector";
-import NewAssignmentForm from "../components/NewAssignmentForm";
+// import NewAssignmentForm from "../components/NewAssignmentForm";
 
 function AssignmentsPage() {
-  let userData = useSelector((state) => state.userDataReducer).user;
-  const [showConfetti, setShowConfetti] = useState(false);
   const dispatch = useDispatch();
+  const [updatedEvents, setUpdatedEvents] = useState([]);
+
+  // Get user data from redux store
+  let userData = useSelector((state) => state.userDataReducer);
   if (!userData)
     userData = { dueDateWeight: 0, typeWeight: 0, difficultyWeight: 0 };
 
+  // Get assignments from redux store using selector that sorts by user preferences
   let events = useSelector((state) =>
     getSortedAssignments(
       state,
@@ -25,18 +29,26 @@ function AssignmentsPage() {
     )
   );
 
+  // confetti!
+  const [showConfetti, setShowConfetti] = useState(false);
+  const completedAnEvent = () => {
+    setShowConfetti(true);
+    setTimeout(() => setShowConfetti(false), 3000); // Change 3000 to the desired duration of the confetti
+  };
+
+  // ------------------ Page Load ----------------------
+
+  // Fetch user data and assignments on page load and every minute
   useEffect(() => {
     dispatch(fetchUserData());
-
     dispatch(getAssignments());
     const interval = setInterval(() => {
-      dispatch(getAssignments()); // automatically refresh data every minute
+      dispatch(getAssignments());
     }, 60000);
-
-    return () => clearInterval(interval); // Cleanup function to clear interval on component unmount
+    return () => clearInterval(interval);
   }, [dispatch]);
 
-  const [updatedEvents, setUpdatedEvents] = useState([]);
+  // ------------------ Event Editing ----------------------
 
   // Update difficulty for an event by ID
   const onUpdateDifficultyAndType = (edited, id, difficulty, type) => {
@@ -63,11 +75,6 @@ function AssignmentsPage() {
       updatedEventsCopy.push(updatedEvent);
     }
     setUpdatedEvents(updatedEventsCopy);
-  };
-
-  const completedAnEvent = () => {
-    setShowConfetti(true);
-    setTimeout(() => setShowConfetti(false), 3000); // Change 3000 to the desired duration of the confetti
   };
 
   // Update all events with updated values
@@ -100,6 +107,8 @@ function AssignmentsPage() {
     const data = await response.json();
     return data;
   };
+
+  // ------------------ Render ----------------------
 
   return (
     <div className="dark:bg-black dark:text-white">

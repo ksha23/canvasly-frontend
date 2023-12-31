@@ -1,20 +1,26 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Navbar from "../components/Navbar";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+
+import { useSelector, useDispatch } from "react-redux";
 import { fetchUserData } from "../redux/actions/userActions";
 import { GET_CALENDAR_DATA } from "../redux/constant";
+
 import SettingsForm from "../components/SettingsForm";
 
 const SettingsPage = () => {
   const dispatch = useDispatch();
-  var userData = useSelector((state) => state.userDataReducer).user;
+  // Get user data and calendars from redux store
+  var userData = useSelector((state) => state.userDataReducer);
   var calendarData = useSelector((state) => state.calendarDataReducer);
+
+  // ------------------ Page Load ----------------------
 
   useEffect(() => {
     dispatch(fetchUserData());
     dispatch({ type: GET_CALENDAR_DATA });
   }, [dispatch]);
+
+  // ------------------ Render ----------------------
 
   return (
     <div className="dark:bg-black dark:text-white">
