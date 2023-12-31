@@ -188,7 +188,7 @@ const EventComponent = ({
       </div>
 
       {/* Assignment Details */}
-      <div className="p-4 bg-slate-100 rounded-bl-md rounded-br-md dark:bg-zinc-800">
+      <div className="p-4 bg-zinc-100 rounded-bl-md rounded-br-md dark:bg-zinc-800">
         {/* Due Date */}
         <p className="text-md">
           <span className="font-semibold">Due: </span>
@@ -202,7 +202,7 @@ const EventComponent = ({
         <div className="md:flex">
           <div className="flex justify-between md:justify-normal">
             <select
-              className="mr-2 px-2 py-2 rounded border border-gray-500 text-sm mt-2 w-1/2 md:w-auto dark:bg-zinc-600"
+              className="mr-2 px-2 py-2 rounded text-sm mt-2 w-1/2 md:w-auto dark:bg-zinc-600"
               onChange={(e) => {
                 handleEdited(id, e.target.value, theType);
               }}
@@ -215,7 +215,7 @@ const EventComponent = ({
               <option value="5">Difficulty 5</option>
             </select>
             <select
-              className="mr-2 px-2 py-2 rounded border border-gray-500 text-sm mt-2 w-1/2 md:w-auto dark:bg-zinc-600"
+              className="mr-2 px-2 py-2 rounded text-sm mt-2 w-1/2 md:w-auto dark:bg-zinc-600"
               onChange={(e) => {
                 handleEdited(id, theDifficulty, e.target.value);
               }}
