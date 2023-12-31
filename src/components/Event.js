@@ -163,8 +163,7 @@ const EventComponent = ({
       /* Determines if we need edited border or not */
       className={`mb-5 ${edited ? "border-2 border-red-500 rounded-lg" : ""}`}
     >
-      <div
-        /* Determines if we need red, yellow, or blue banner */
+      {/* <div
         className={
           formattedDateTime < new Date()
             ? "bg-red-500 rounded-tl-md rounded-tr-md"
@@ -173,10 +172,41 @@ const EventComponent = ({
             : "bg-blue-500 rounded-tl-md rounded-tr-md"
         }
       >
-        <h3 className="text-lg font-bold text-white py-2 px-4">
-          {displayName}
-          <span className="text-white">{name.replace(/\[.*?\]/, "")}</span>
-        </h3>
+        <div className = "">
+          <h3 className="text-lg font-bold text-white py-2 px-4">
+            {displayName}
+            <span className="text-white">{name.replace(/\[.*?\]/, "")}</span>
+          </h3>
+          <button
+            className="bg-green-600 text-white px-4 py-2 rounded-md mt-2 mr-2 text-sm"
+            onClick={() => completeDB(id)}
+          >
+            Complete
+          </button>
+        </div>
+      </div> */}
+      <div
+        className={
+          formattedDateTime < new Date()
+            ? "bg-red-500 rounded-tl-md rounded-tr-md"
+            : formattedDateTime.toDateString() === new Date().toDateString()
+            ? "bg-yellow-500 rounded-tl-md rounded-tr-md"
+            : "bg-blue-500 rounded-tl-md rounded-tr-md"
+        }
+      >
+        <div className="flex justify-between items-center">
+          <h3 className="text-lg font-bold text-white py-2 px-4">
+            {displayName}
+            <span className="text-white">{name.replace(/\[.*?\]/, "")}</span>
+          </h3>
+          {/* Complete Button */}
+          <button
+            className="bg-green-600 text-white px-3 py-1 rounded-md m-2 mr-4 text-sm"
+            onClick={() => completeDB(id)}
+          >
+            Done
+          </button>
+        </div>
       </div>
 
       {/* Assignment Details */}
@@ -189,14 +219,6 @@ const EventComponent = ({
             (formattedDateTime - new Date()) / (1000 * 60 * 60 * 24)
           )} days)`}
         </p>
-
-        {/* Complete Button */}
-        <button
-          className="bg-green-600 text-white px-4 py-2 rounded-md mt-2 mr-2 text-sm"
-          onClick={() => completeDB(id)}
-        >
-          Complete
-        </button>
 
         {/* Difficulty and Type */}
         <select
@@ -295,10 +317,10 @@ const EventComponent = ({
           </div>
         ) : (
           <button
-            className="text-sm bg-blue-500 text-white px-4 py-2 rounded mt-2"
+            className="text-sm text-slate-400 px-2 py-2 rounded underline"
             onClick={() => setShowAddReminder(true)}
           >
-            + Reminder
+            Add Reminder
           </button>
         )}
       </div>

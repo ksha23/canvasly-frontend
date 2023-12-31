@@ -84,7 +84,7 @@ const Navbar = () => {
         </div>
         <div className="flex items-center">
           <div className="user-profile">
-            {userData && (
+            {isLoggedIn && userData && (
               <img
                 className="h-8 w-8 rounded-full"
                 src={userData.photo}
