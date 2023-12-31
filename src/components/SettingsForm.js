@@ -93,7 +93,7 @@ const SettingsForm = () => {
 
             {calendarData && (
               <select
-                className="block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 mb-4 border border-gray-200 px-2 py-2 dark:dark:bg-zinc-600"
+                className="block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 mb-4 border border-gray-500 px-2 py-2 dark:dark:bg-zinc-600"
                 name="calendars"
                 id="calendars"
                 value={calendarId}
@@ -118,7 +118,7 @@ const SettingsForm = () => {
                   type="number"
                   value={dueDateWeight}
                   onChange={(e) => setDueDateWeight(e.target.value)}
-                  className="block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 border border-gray-200 px-2 py-2 mt-2 dark:bg-zinc-600"
+                  className="block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 border border-gray-500 px-2 py-2 mt-2 dark:bg-zinc-600"
                 />
               </div>
 
@@ -131,7 +131,7 @@ const SettingsForm = () => {
                   type="number"
                   value={typeWeight}
                   onChange={(e) => setTypeWeight(e.target.value)}
-                  className="block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 border border-gray-200 px-2 py-2 mt-2 dark:bg-zinc-600"
+                  className="block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 border border-gray-500 px-2 py-2 mt-2 dark:bg-zinc-600"
                 />
               </div>
 
@@ -144,7 +144,7 @@ const SettingsForm = () => {
                   type="number"
                   value={difficultyWeight}
                   onChange={(e) => setDifficultyWeight(e.target.value)}
-                  className="block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 border border-gray-200 px-2 py-2 mt-2 dark:bg-zinc-600"
+                  className="block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 border border-gray-500 px-2 py-2 mt-2 dark:bg-zinc-600"
                 />
               </div>
               <button
