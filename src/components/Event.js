@@ -261,7 +261,7 @@ const EventComponent = ({
                 <div key={index} className="flex items-center w-full">
                   {editedReminderIndex === index ? (
                     <textarea
-                      className="w-full px-2 text-base dark:bg-zinc-600"
+                      className="w-full px-2 text-base dark:bg-zinc-600 m-1"
                       value={editedReminders[index]}
                       onChange={(e) =>
                         handleEditReminder(index, e.target.value)
