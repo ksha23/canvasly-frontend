@@ -6,6 +6,7 @@ import { UPDATE_ASSIGNMENT_TYPE } from "../constant";
 import { UPDATE_ASSIGNMENT_DIFFICULTY } from "../constant";
 import { ADD_ASSIGNMENT_REMINDER } from "../constant";
 import { UPDATE_ASSIGNMENT_REMINDER_ARRAY } from "../constant";
+import { DELETE_ASSIGNMENT_REMINDER } from "../constant";
 
 // get assignments from database and store in redux store
 export const getAssignments = () => {
@@ -46,6 +47,14 @@ export const addAssignmentReminderAction = (id, reminder) => {
     type: ADD_ASSIGNMENT_REMINDER,
     id,
     reminder,
+  };
+};
+
+export const deleteAssignmentReminderAction = (id, reminderIndex) => {
+  return {
+    type: DELETE_ASSIGNMENT_REMINDER,
+    id,
+    reminderIndex,
   };
 };
 

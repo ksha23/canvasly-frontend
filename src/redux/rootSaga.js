@@ -8,6 +8,7 @@ import getCalendarDataSaga from "./saga/getCalendarDataSaga";
 import setWeightsSaga from "./saga/setWeightsSaga";
 import setCalendarIdSaga from "./saga/setCalendarIdSaga";
 import updateAssignmentReminderArraySaga from "./saga/updateAssignmentReminderArraySaga";
+import deleteAssignmentReminderSaga from "./saga/deleteAssignmentReminderSaga";
 
 import { all } from "redux-saga/effects";
 
@@ -23,5 +24,6 @@ export default function* rootSaga() {
     setWeightsSaga(),
     setCalendarIdSaga(),
     updateAssignmentReminderArraySaga(),
+    deleteAssignmentReminderSaga(),
   ]);
 }

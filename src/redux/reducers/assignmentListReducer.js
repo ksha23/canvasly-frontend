@@ -5,6 +5,7 @@ import {
   UPDATE_ASSIGNMENT_TYPE,
   RESET,
   UPDATE_ASSIGNMENT_REMINDER_ARRAY,
+  DELETE_ASSIGNMENT_REMINDER,
 } from "../constant";
 import { COMPLETE_ASSIGNMENT } from "../constant";
 
@@ -36,6 +37,11 @@ export const assignmentsListReducer = (data = [], action) => {
       const id4 = action.id;
       const index4 = data.findIndex((assignment) => assignment._id === id4);
       data[index4].reminders.push(action.reminder);
+      return [...data];
+    case DELETE_ASSIGNMENT_REMINDER:
+      const id6 = action.id;
+      const index6 = data.findIndex((assignment) => assignment._id === id6);
+      data[index6].reminders.splice(action.reminderIndex, 1);
       return [...data];
     case UPDATE_ASSIGNMENT_REMINDER_ARRAY:
       const id5 = action.id;

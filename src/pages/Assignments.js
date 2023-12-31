@@ -31,10 +31,6 @@ function AssignmentsPage() {
 
   // confetti!
   const [showConfetti, setShowConfetti] = useState(false);
-  const completedAnEvent = () => {
-    setShowConfetti(true);
-    setTimeout(() => setShowConfetti(false), 3000); // Change 3000 to the desired duration of the confetti
-  };
 
   // ------------------ Page Load ----------------------
 
@@ -150,8 +146,6 @@ function AssignmentsPage() {
                     type={event.type}
                     reminders={event.reminders}
                     onUpdateDifficultyAndType={onUpdateDifficultyAndType}
-                    completedAnEvent={completedAnEvent}
-                    className="event"
                   />
                 ) : null
               )}
