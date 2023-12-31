@@ -13,7 +13,9 @@ const HomePage = () => {
         </p>
 
         <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Why Choose CanvasLy?</h2>
+          <h2 className="text-2xl font-bold mb-4 text-blue-500 dark:text-blue-400">
+            Why Choose CanvasLy?
+          </h2>
           <ul className="text-left list-disc ml-6 dark:text-slate-300">
             <li>
               Effortlessly manage upcoming assignments, quizzes, projects, and
@@ -28,7 +30,9 @@ const HomePage = () => {
         </div>
 
         <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">How to Get Started:</h2>
+          <h2 className="text-2xl font-bold mb-4 text-blue-500 dark:text-blue-400">
+            How to Get Started:
+          </h2>
           <ol className="text-left list-decimal ml-6 dark:text-slate-300">
             <li>Access "Canvas Calendar" in the Canvas side menu</li>
             <li>Locate "Calendar Feed" and copy the URL</li>
