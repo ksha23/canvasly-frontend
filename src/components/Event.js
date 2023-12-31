@@ -163,28 +163,6 @@ const EventComponent = ({
       /* Determines if we need edited border or not */
       className={`mb-5 ${edited ? "border-2 border-red-500 rounded-lg" : ""}`}
     >
-      {/* <div
-        className={
-          formattedDateTime < new Date()
-            ? "bg-red-500 rounded-tl-md rounded-tr-md"
-            : formattedDateTime.toDateString() === new Date().toDateString()
-            ? "bg-yellow-500 rounded-tl-md rounded-tr-md"
-            : "bg-blue-500 rounded-tl-md rounded-tr-md"
-        }
-      >
-        <div className = "">
-          <h3 className="text-lg font-bold text-white py-2 px-4">
-            {displayName}
-            <span className="text-white">{name.replace(/\[.*?\]/, "")}</span>
-          </h3>
-          <button
-            className="bg-green-600 text-white px-4 py-2 rounded-md mt-2 mr-2 text-sm"
-            onClick={() => completeDB(id)}
-          >
-            Complete
-          </button>
-        </div>
-      </div> */}
       <div
         className={
           formattedDateTime < new Date()
@@ -221,50 +199,58 @@ const EventComponent = ({
         </p>
 
         {/* Difficulty and Type */}
-        <select
-          className="mr-2 px-2 py-2 rounded border border-gray-300 text-sm mt-2 w-full md:w-auto dark:bg-zinc-600"
-          onChange={(e) => {
-            handleEdited(id, e.target.value, theType);
-          }}
-          value={theDifficulty}
-        >
-          <option value="1">Difficulty 1</option>
-          <option value="2">Difficulty 2</option>
-          <option value="3">Difficulty 3</option>
-          <option value="4">Difficulty 4</option>
-          <option value="5">Difficulty 5</option>
-        </select>
-        <select
-          className="mr-2 px-2 py-2 rounded border border-gray-300 text-sm mt-2 w-full md:w-auto dark:bg-zinc-600"
-          onChange={(e) => {
-            handleEdited(id, theDifficulty, e.target.value);
-          }}
-          value={theType}
-        >
-          <option value="Assignment">Assignment</option>
-          <option value="Quiz">Quiz</option>
-          <option value="Exam">Exam</option>
-          <option value="Project">Project</option>
-          <option value="Other">Other</option>
-        </select>
+        <div className="md:flex">
+          <div className="flex justify-between md:justify-normal">
+            <select
+              className="mr-2 px-2 py-2 rounded border border-gray-300 text-sm mt-2 w-1/2 md:w-auto dark:bg-zinc-600"
+              onChange={(e) => {
+                handleEdited(id, e.target.value, theType);
+              }}
+              value={theDifficulty}
+            >
+              <option value="1">Difficulty 1</option>
+              <option value="2">Difficulty 2</option>
+              <option value="3">Difficulty 3</option>
+              <option value="4">Difficulty 4</option>
+              <option value="5">Difficulty 5</option>
+            </select>
+            <select
+              className="mr-2 px-2 py-2 rounded border border-gray-300 text-sm mt-2 w-1/2 md:w-auto dark:bg-zinc-600"
+              onChange={(e) => {
+                handleEdited(id, theDifficulty, e.target.value);
+              }}
+              value={theType}
+            >
+              <option value="Assignment">Assignment</option>
+              <option value="Quiz">Quiz</option>
+              <option value="Exam">Exam</option>
+              <option value="Project">Project</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
 
-        {/* Update and Undo Buttons */}
-        {edited && (
-          <button
-            className="bg-green-600 text-white px-4 py-2 rounded-md ml-2 text-sm sm: mt-2"
-            onClick={() => handleUpdateButtonClick(id, theDifficulty, theType)}
-          >
-            Update
-          </button>
-        )}
-        {edited && (
-          <button
-            className="mr-2 bg-red-500 text-white px-4 py-2 rounded-md ml-2 text-sm sm: mt-2"
-            onClick={() => undoAllChanges()}
-          >
-            Undo
-          </button>
-        )}
+          {/* Update and Undo Buttons */}
+          <div className="">
+            {edited && (
+              <button
+                className="bg-green-600 text-white px-4 py-2 rounded-md text-sm sm: mt-2"
+                onClick={() =>
+                  handleUpdateButtonClick(id, theDifficulty, theType)
+                }
+              >
+                Update
+              </button>
+            )}
+            {edited && (
+              <button
+                className="mr-2 bg-red-500 text-white px-4 py-2 rounded-md ml-2 text-sm sm: mt-2"
+                onClick={() => undoAllChanges()}
+              >
+                Undo
+              </button>
+            )}
+          </div>
+        </div>
 
         {/*Reminders*/}
         {reminders && reminders.length > 0 && (
