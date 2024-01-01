@@ -9,6 +9,7 @@ import { updateAssignmentType } from "../redux/actions/assignmentListActions";
 import { deleteAssignmentReminderAction } from "../redux/actions/assignmentListActions";
 import { addAssignmentReminderAction } from "../redux/actions/assignmentListActions";
 import { updateAssignmentReminderArray } from "../redux/actions/assignmentListActions";
+import TextAreaAutoSize from "react-textarea-autosize";
 
 const EventComponent = ({
   id,
@@ -260,8 +261,8 @@ const EventComponent = ({
               {reminders.map((reminder, index) => (
                 <div key={index} className="flex items-center w-full">
                   {editedReminderIndex === index ? (
-                    <textarea
-                      className="w-full px-2 text-base dark:bg-zinc-600 m-1"
+                    <TextAreaAutoSize
+                      className="w-full px-2 text-base dark:bg-zinc-600"
                       value={editedReminders[index]}
                       onChange={(e) =>
                         handleEditReminder(index, e.target.value)
@@ -287,12 +288,12 @@ const EventComponent = ({
         {/* Add Reminder Input */}
         {showAddReminder ? (
           <div className="mt-4 w-full flex">
-            <input
-              type="text"
+            <TextAreaAutoSize
+              className="text-sm w-full px-2 py-2 text-base dark:bg-zinc-600 mr-2 resize"
               value={newReminderText}
               onChange={(e) => setNewReminderText(e.target.value)}
               placeholder="Add a reminder..."
-              className="text-sm px-2 py-2 rounded mr-2 w-full flex-grow dark:text-white dark:bg-zinc-600"
+              autoFocus
             />
             <button
               className="text-sm bg-blue-500 text-white px-3 py-1 rounded"
