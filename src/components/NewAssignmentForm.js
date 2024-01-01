@@ -25,15 +25,19 @@ const NewAssignmentForm = ({ onFormSubmit }) => {
     let calendarId = userData.calendarId;
     const data = { assignment, calendarId };
     dispatch({ type: "ADD_ASSIGNMENT", payload: { data } });
-    setAssignment({
-      name: "",
-      dueDate: "",
-      type: "Other",
-      difficulty: "1",
-    });
+    // setAssignment({
+    //   name: "",
+    //   dueDate: "",
+    //   type: "Other",
+    //   difficulty: "1",
+    // });
+
+    // wait for 1 second before reloading the page
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
 
     // onFormSubmit();
-    window.location.reload();
   };
 
   return (
