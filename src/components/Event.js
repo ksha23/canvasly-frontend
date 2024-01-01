@@ -332,7 +332,6 @@ const EventComponent = ({
               value={newReminderText}
               onChange={(e) => setNewReminderText(e.target.value)}
               placeholder="Add a reminder..."
-              onBlur={() => setShowAddReminder(false)}
               autoFocus
             />
             <button
