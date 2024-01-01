@@ -292,7 +292,7 @@ const EventComponent = ({
               value={newReminderText}
               onChange={(e) => setNewReminderText(e.target.value)}
               placeholder="Add a reminder..."
-              className="border border-gray-300 text-sm px-2 py-2 rounded mr-2 w-full flex-grow dark:text-white dark:bg-zinc-600"
+              className="text-sm px-2 py-2 rounded mr-2 w-full flex-grow dark:text-white dark:bg-zinc-600"
             />
             <button
               className="text-sm bg-blue-500 text-white px-3 py-1 rounded"
