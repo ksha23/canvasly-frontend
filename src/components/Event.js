@@ -188,7 +188,7 @@ const EventComponent = ({
       </div>
 
       {/* Assignment Details */}
-      <div className="p-4 bg-zinc-100 rounded-bl-md rounded-br-md dark:bg-zinc-800">
+      <div className="p-4 bg-zinc-200 rounded-bl-md rounded-br-md dark:bg-zinc-800">
         {/* Due Date */}
         <p className="text-md">
           <span className="font-semibold">Due: </span>
@@ -303,7 +303,7 @@ const EventComponent = ({
           </div>
         ) : (
           <button
-            className="text-sm text-slate-400 px-2 py-2 rounded underline"
+            className="text-sm text-slate-600 px-2 py-2 rounded underline dark:text-slate-400"
             onClick={() => setShowAddReminder(true)}
           >
             Add Reminder
