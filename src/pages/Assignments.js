@@ -36,8 +36,6 @@ function AssignmentsPage() {
 
   // Fetch user data and assignments on page load and every minute
   useEffect(() => {
-    dispatch(fetchUserData());
-    dispatch(getAssignments());
     const interval = setInterval(() => {
       dispatch(getAssignments());
     }, 60000);

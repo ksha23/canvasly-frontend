@@ -328,7 +328,7 @@ const EventComponent = ({
         {showAddReminder ? (
           <div className="mt-4 w-full flex items-center">
             <TextAreaAutoSize
-              className="text-sm w-full px-2 py-2 text-base dark:bg-zinc-600 mr-2 resize"
+              className="text-sm w-full px-2 py-2 dark:bg-zinc-600 mr-2"
               value={newReminderText}
               onChange={(e) => setNewReminderText(e.target.value)}
               placeholder="Add a reminder..."
