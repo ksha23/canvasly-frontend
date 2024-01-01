@@ -1,39 +1,45 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-const NewAssignmentForm = () => {
+const NewAssignmentForm = ({ onFormSubmit }) => {
+  let userData = useSelector((state) => state.userDataReducer);
   const [assignment, setAssignment] = useState({
     name: "",
     dueDate: "",
-    time: "",
-    type: "",
-    difficulty: "",
-    reminders: [],
+    type: "Other",
+    difficulty: "1",
   });
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setAssignment({ ...assignment, [name]: value });
+    if (name === "dueDate") {
+      setAssignment({ ...assignment, [name]: value });
+    } else {
+      setAssignment({ ...assignment, [name]: value });
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // You can handle form submission here, like sending data to an API or performing any other action
-    console.log("New Assignment:", assignment);
-    // Reset form fields after submission
+    let calendarId = userData.calendarId;
+    const data = { assignment, calendarId };
+    dispatch({ type: "ADD_ASSIGNMENT", payload: { data } });
     setAssignment({
       name: "",
       dueDate: "",
-      time: "",
-      type: "",
-      difficulty: "",
-      reminders: [],
+      type: "Other",
+      difficulty: "1",
     });
+
+    // onFormSubmit();
+    window.location.reload();
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-md mx-auto mt-8 p-6 bg-gray-100 rounded-lg shadow-md"
+      className="max-w-md mx-auto mt-8 p-6 bg-gray-100 rounded-lg shadow-md dark:bg-zinc-800"
     >
       <h2 className="text-xl font-bold mb-4">Add New Assignment</h2>
       <div className="mb-4">
@@ -46,7 +52,8 @@ const NewAssignmentForm = () => {
           name="name"
           value={assignment.name}
           onChange={handleChange}
-          className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+          placeholder="Assignment Name"
+          className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 dark:text-black"
         />
       </div>
       <div className="mb-4">
@@ -57,9 +64,9 @@ const NewAssignmentForm = () => {
           type="datetime-local"
           id="dueDate"
           name="dueDate"
-          value={`${assignment.dueDate}T${assignment.time}`}
+          value={assignment.dueDate}
           onChange={handleChange}
-          className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+          className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 dark:text-black"
         />
       </div>
       <div className="mb-4">
@@ -71,15 +78,13 @@ const NewAssignmentForm = () => {
           name="type"
           value={assignment.type}
           onChange={handleChange}
-          className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+          className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 dark:text-black"
         >
-          <option value="">Select Type</option>
-          <option value="Homework">Assignment</option>
+          <option value="Other">Other</option>
+          <option value="Assignment">Assignment</option>
           <option value="Quiz">Quiz</option>
           <option value="Project">Project</option>
           <option value="Exam">Exam</option>
-          <option value="Other">Other</option>
-
           {/* Add other options as needed */}
         </select>
       </div>
@@ -89,12 +94,12 @@ const NewAssignmentForm = () => {
         </label>
         <select
           id="difficulty"
+          required
           name="difficulty"
           value={assignment.difficulty}
           onChange={handleChange}
-          className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+          className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 dark:text-black"
         >
-          <option value="">Select Difficulty</option>
           <option value="1">Difficulty 1</option>
           <option value="2">Difficulty 2</option>
           <option value="3">Difficulty 3</option>
@@ -104,24 +109,17 @@ const NewAssignmentForm = () => {
           {/* Add other options as needed */}
         </select>
       </div>
-      <div className="mb-4">
-        <label htmlFor="reminders" className="block mb-2">
-          Reminders:
-        </label>
-        <input
-          type="text"
-          id="reminders"
-          name="reminders"
-          value={assignment.reminders}
-          onChange={handleChange}
-          className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
-        />
-      </div>
       <button
         type="submit"
         className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
       >
         Add Assignment
+      </button>
+      <button
+        onClick={onFormSubmit}
+        className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 ml-2"
+      >
+        Cancel
       </button>
     </form>
   );

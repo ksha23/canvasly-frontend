@@ -150,8 +150,6 @@ const EventComponent = ({
     );
   };
 
-  // ------------------------- Page Load -------------------------
-
   let assignments = useSelector((state) => state.assignmentsListReducer);
   let assignment = assignments.find((assignment) => assignment._id === id);
   const extractedContent = extractContentInBrackets(name);
@@ -253,37 +251,7 @@ const EventComponent = ({
           </div>
         </div>
 
-        {/*Reminders*/}
-        {/* {reminders && reminders.length > 0 && (
-          <div className="mt-4">
-            <p className="font-semibold">Reminders:</p>
-            <ul className="list-disc ml-6">
-              {reminders.map((reminder, index) => (
-                <div key={index} className="flex items-center w-full">
-                  {editedReminderIndex === index ? (
-                    <TextAreaAutoSize
-                      className="w-full px-2 text-base dark:bg-zinc-600"
-                      value={editedReminders[index]}
-                      onChange={(e) =>
-                        handleEditReminder(index, e.target.value)
-                      }
-                      autoFocus
-                      onBlur={() => updateReminder(index)}
-                    />
-                  ) : (
-                    <li onClick={() => setEditedIndex(index)}>{reminder}</li>
-                  )}
-                  <button
-                    className="text-slate-600 ml-4 text-default dark:text-slate-400"
-                    onClick={() => removeReminder(index)}
-                  >
-                    ⓧ
-                  </button>
-                </div>
-              ))}
-            </ul>
-          </div>
-        )} */}
+        {/* Reminders */}
         {reminders && reminders.length > 0 && (
           <div className="mt-4">
             <p className="font-semibold">Reminders:</p>
@@ -328,7 +296,7 @@ const EventComponent = ({
         {showAddReminder ? (
           <div className="mt-4 w-full flex items-center">
             <TextAreaAutoSize
-              className="text-sm w-full px-2 py-2 dark:bg-zinc-600 mr-2"
+              className="text-sm w-full px-2 py-2 dark:bg-zinc-600 mr-2 rounded"
               value={newReminderText}
               onChange={(e) => setNewReminderText(e.target.value)}
               placeholder="Add a reminder..."

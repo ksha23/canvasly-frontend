@@ -2,17 +2,16 @@ import { useEffect, useState } from "react";
 
 import EventComponent from "../components/Event";
 import Navbar from "../components/Navbar";
-import Confetti from "react-confetti";
 
 import { useSelector, useDispatch } from "react-redux";
 import { getAssignments } from "../redux/actions/assignmentListActions";
-import { fetchUserData } from "../redux/actions/userActions";
 import { getSortedAssignments } from "../redux/selectors/assignmentListSelector";
-// import NewAssignmentForm from "../components/NewAssignmentForm";
+import NewAssignmentForm from "../components/NewAssignmentForm";
 
 function AssignmentsPage() {
   const dispatch = useDispatch();
   const [updatedEvents, setUpdatedEvents] = useState([]);
+  const [showForm, setShowForm] = useState(false);
 
   // Get user data from redux store
   let userData = useSelector((state) => state.userDataReducer);
@@ -28,9 +27,6 @@ function AssignmentsPage() {
       userData.difficultyWeight
     )
   );
-
-  // confetti!
-  const [showConfetti, setShowConfetti] = useState(false);
 
   // ------------------ Page Load ----------------------
 
@@ -102,66 +98,78 @@ function AssignmentsPage() {
     return data;
   };
 
+  //------------------ Event Handler ----------------------
+
+  const handleFormClose = () => {
+    setShowForm(false);
+  };
+
   // ------------------ Render ----------------------
 
   return (
     <div className="dark:bg-black dark:text-white">
       <Navbar />
-      <div className="p-10">
-        {showConfetti && <Confetti />}
-        <main className="max-w-4xl mx-auto">
-          <section>
-            <h2 className="text-2xl font-bold">Canvas Assignments:</h2>
-          </section>
-
-          <section className="mb-4 flex justify-between items-center">
-            {updatedEvents.length > 0 && (
+      {showForm ? (
+        <NewAssignmentForm onFormSubmit={handleFormClose} />
+      ) : (
+        <div className="p-10">
+          <main className="max-w-4xl mx-auto">
+            <section>
+              <h2 className="text-2xl font-bold">Canvas Assignments:</h2>
               <button
-                className="bg-green-600 text-white text-sm px-4 py-2 rounded-md mt-2"
-                onClick={updateAllEvents}
+                onClick={() => {
+                  setShowForm(true);
+                }}
               >
-                Update All
+                + Assignment
               </button>
-            )}
-            {updatedEvents.length > 0 && (
-              <p className="dark:text-white">
-                {updatedEvents.length} assignments edited
-              </p>
-            )}
-          </section>
+            </section>
 
-          <div>
-            {events &&
-              events.length > 0 &&
-              events.map((event) =>
-                !event.completed ? (
-                  <EventComponent
-                    key={event._id}
-                    id={event._id}
-                    name={event.name}
-                    dateTime={event.dueDate}
-                    difficulty={event.difficulty}
-                    type={event.type}
-                    reminders={event.reminders}
-                    onUpdateDifficultyAndType={onUpdateDifficultyAndType}
-                  />
-                ) : null
+            <section className="mb-4 flex justify-between items-center">
+              {updatedEvents.length > 0 && (
+                <button
+                  className="bg-green-600 text-white text-sm px-4 py-2 rounded-md mt-2"
+                  onClick={updateAllEvents}
+                >
+                  Update All
+                </button>
               )}
-            {!events ||
-              (events.length === 0 && (
-                <p className="text-center">No assignments found</p>
-              ))}
-          </div>
+              {updatedEvents.length > 0 && (
+                <p className="dark:text-white">
+                  {updatedEvents.length} assignments edited
+                </p>
+              )}
+            </section>
 
-          {/* <section>
+            <div>
+              {events &&
+                events.length > 0 &&
+                events.map((event) =>
+                  !event.completed ? (
+                    <EventComponent
+                      key={event._id}
+                      id={event._id}
+                      name={event.name}
+                      dateTime={event.dueDate}
+                      difficulty={event.difficulty}
+                      type={event.type}
+                      reminders={event.reminders}
+                      onUpdateDifficultyAndType={onUpdateDifficultyAndType}
+                    />
+                  ) : null
+                )}
+              {!events ||
+                (events.length === 0 && (
+                  <p className="text-center">No assignments found</p>
+                ))}
+            </div>
+
+            {/* <section>
             <h2 className="text-2xl font-bold">Completed Assignments:</h2>
-          </section>
-
-          <div>
-            <NewAssignmentForm />
-          </div> */}
-        </main>
-      </div>
+          </section> */}
+          </main>
+        </div>
+      )}
     </div>
   );
 }
