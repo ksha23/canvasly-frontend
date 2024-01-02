@@ -7,11 +7,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAssignments } from "../redux/actions/assignmentListActions";
 import { getSortedAssignments } from "../redux/selectors/assignmentListSelector";
 import NewAssignmentForm from "../components/NewAssignmentForm";
+import applyTheme from "../utils/colorThemeHandler";
 
 function AssignmentsPage() {
   const dispatch = useDispatch();
   const [updatedEvents, setUpdatedEvents] = useState([]);
   const [showForm, setShowForm] = useState(false);
+
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", (event) => {
+      applyTheme(); // Update the theme when the preference changes
+    });
 
   // Get user data from redux store
   let userData = useSelector((state) => state.userDataReducer);

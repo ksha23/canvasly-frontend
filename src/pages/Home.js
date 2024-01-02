@@ -1,8 +1,15 @@
 import Navbar from "../components/Navbar";
 import "./Home.css";
 import Youtube from "../components/Youtube";
+import applyTheme from "../utils/colorThemeHandler";
 
 const HomePage = () => {
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", (event) => {
+      applyTheme(); // Update the theme when the preference changes
+    });
+
   return (
     <div className="dark:bg-black dark:text-white">
       <Navbar />

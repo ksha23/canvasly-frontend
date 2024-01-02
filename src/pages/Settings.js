@@ -1,7 +1,14 @@
 import Navbar from "../components/Navbar";
 import SettingsForm from "../components/SettingsForm";
+import applyTheme from "../utils/colorThemeHandler";
 
 const SettingsPage = () => {
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", (event) => {
+      applyTheme(); // Update the theme when the preference changes
+    });
+
   return (
     <div className="dark:bg-black dark:text-white">
       <Navbar />
