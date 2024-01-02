@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ADD_ASSIGNMENT } from "../redux/constant";
-import "./NewAssignmentForm.css";
 
 const NewAssignmentForm = ({ onFormSubmit }) => {
   let userData = useSelector((state) => state.userDataReducer);
@@ -77,7 +76,7 @@ const NewAssignmentForm = ({ onFormSubmit }) => {
           name="dueDate"
           value={assignment.dueDate}
           onChange={handleChange}
-          className="w-full rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 dark:text-white dark:bg-zinc-600"
+          className="duedate-input w-full rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 dark:text-white dark:bg-zinc-600"
         />
       </div>
       <div className="mb-4">
