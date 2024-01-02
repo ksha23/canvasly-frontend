@@ -22,6 +22,7 @@ const EventComponent = ({
 }) => {
   const dispatch = useDispatch();
   const formattedDateTime = new Date(dateTime);
+  console.log("name", name, "formattedDateTime", formattedDateTime);
 
   // ----------------------- State Variables ---------------------------
 
@@ -41,6 +42,21 @@ const EventComponent = ({
     reminders = [];
   }
   const [editedReminders, setEditedReminders] = useState([...reminders]);
+
+  function formatFriendlyDateTime(dateTimeString) {
+    const options = {
+      weekday: "short",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      timeZoneName: "short",
+    };
+
+    const dateTime = new Date(dateTimeString);
+    return dateTime.toLocaleString(undefined, options);
+  }
 
   // ----------------------- Updating Difficulty and Type ---------------------------
 
@@ -105,7 +121,7 @@ const EventComponent = ({
       Object.prototype.toString.call(date) === "[object Date]" &&
       !isNaN(date)
     ) {
-      return date.toDateString();
+      return formatFriendlyDateTime(date.toString());
     } else {
       return "Invalid Date";
     }
