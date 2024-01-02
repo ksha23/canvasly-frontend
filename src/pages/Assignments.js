@@ -110,7 +110,7 @@ function AssignmentsPage() {
     <div className="dark:bg-black dark:text-white">
       <Navbar />
       {showForm ? (
-        <div className="justify-center items-center h-screen">
+        <div className="flex justify-center items-center">
           <NewAssignmentForm onFormSubmit={handleFormClose} />
         </div>
       ) : (

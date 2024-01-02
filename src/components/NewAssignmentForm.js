@@ -49,7 +49,7 @@ const NewAssignmentForm = ({ onFormSubmit }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="m-8 p-6 bg-gray-100 rounded-lg shadow-md dark:bg-zinc-800"
+      className="w-full max-w-lg m-10 p-5 bg-gray-100 rounded-lg shadow-md dark:bg-zinc-800"
     >
       <h2 className="text-xl font-bold mb-4">Add New Assignment</h2>
       <div className="mb-4">
@@ -63,7 +63,7 @@ const NewAssignmentForm = ({ onFormSubmit }) => {
           value={assignment.name}
           onChange={handleChange}
           placeholder="Assignment Name"
-          className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 dark:text-black"
+          className="w-full rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 dark:text-white dark:bg-zinc-600"
         />
       </div>
       <div className="mb-4">
@@ -76,7 +76,7 @@ const NewAssignmentForm = ({ onFormSubmit }) => {
           name="dueDate"
           value={assignment.dueDate}
           onChange={handleChange}
-          className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 dark:text-black"
+          className="w-full rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 dark:text-white dark:bg-zinc-600"
         />
       </div>
       <div className="mb-4">
@@ -88,7 +88,7 @@ const NewAssignmentForm = ({ onFormSubmit }) => {
           name="type"
           value={assignment.type}
           onChange={handleChange}
-          className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 dark:text-black"
+          className="w-full rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 dark:text-white dark:bg-zinc-600"
         >
           <option value="Other">Other</option>
           <option value="Assignment">Assignment</option>
@@ -108,7 +108,7 @@ const NewAssignmentForm = ({ onFormSubmit }) => {
           name="difficulty"
           value={assignment.difficulty}
           onChange={handleChange}
-          className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 dark:text-black"
+          className="w-full rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 dark:text-white dark:bg-zinc-600"
         >
           <option value="1">Difficulty 1</option>
           <option value="2">Difficulty 2</option>
