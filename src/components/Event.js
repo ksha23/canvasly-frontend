@@ -37,6 +37,9 @@ const EventComponent = ({
   // used to keep track of reminders that are not in redux or db (for ongoing changes)
   const [editedReminderIndex, setEditedIndex] = useState(null);
   const [newReminderText, setNewReminderText] = useState("");
+  if (reminders === undefined) {
+    reminders = [];
+  }
   const [editedReminders, setEditedReminders] = useState([...reminders]);
 
   // ----------------------- Updating Difficulty and Type ---------------------------

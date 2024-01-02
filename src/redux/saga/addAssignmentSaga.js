@@ -4,7 +4,6 @@ import { ADD_ASSIGNMENT } from "../constant";
 // worker Saga: will be fired on ADD_ASSIGNMENT actions
 function* addAssignmentWorker(action) {
   const { data } = action.payload;
-  console.log(data);
   const assignment = {
     name: data.assignment.name,
     dueDate: data.assignment.dueDate,
@@ -14,7 +13,7 @@ function* addAssignmentWorker(action) {
   const calendarId = data.calendarId;
   try {
     // do api call
-    yield fetch(
+    const response = yield fetch(
       `${process.env.REACT_APP_API_URL}/api/v1/assignments/add/${calendarId}`,
       {
         method: "POST",
@@ -24,6 +23,7 @@ function* addAssignmentWorker(action) {
         body: JSON.stringify(assignment),
       }
     );
+    const responseData = yield response.json();
   } catch (e) {
     console.error("Failed to add new assignment: ", e);
   }

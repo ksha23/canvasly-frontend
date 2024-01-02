@@ -6,6 +6,7 @@ import {
   RESET,
   UPDATE_ASSIGNMENT_REMINDER_ARRAY,
   DELETE_ASSIGNMENT_REMINDER,
+  ADD_ASSIGNMENT,
 } from "../constant";
 import { COMPLETE_ASSIGNMENT } from "../constant";
 
@@ -48,6 +49,8 @@ export const assignmentsListReducer = (data = [], action) => {
       const index5 = data.findIndex((assignment) => assignment._id === id5);
       data[index5].reminders = action.reminders;
       return [...data];
+    case ADD_ASSIGNMENT:
+      return [...data, action.payload.data.assignment];
     default:
       return data;
   }

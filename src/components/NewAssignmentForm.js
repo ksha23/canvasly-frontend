@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { ADD_ASSIGNMENT } from "../redux/constant";
 
 const NewAssignmentForm = ({ onFormSubmit }) => {
   let userData = useSelector((state) => state.userDataReducer);
@@ -23,27 +24,32 @@ const NewAssignmentForm = ({ onFormSubmit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let calendarId = userData.calendarId;
-    const data = { assignment, calendarId };
-    dispatch({ type: "ADD_ASSIGNMENT", payload: { data } });
-    // setAssignment({
-    //   name: "",
-    //   dueDate: "",
-    //   type: "Other",
-    //   difficulty: "1",
-    // });
+    let data = { assignment, calendarId };
+    dispatch({ type: ADD_ASSIGNMENT, payload: { data } });
 
-    // wait for 1 second before reloading the page
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+    setAssignment({
+      name: "",
+      dueDate: "",
+      type: "Other",
+      difficulty: "1",
+    });
 
-    // onFormSubmit();
+    onFormSubmit();
   };
+
+  useEffect(() => {
+    setAssignment({
+      name: "",
+      dueDate: "",
+      type: "Other",
+      difficulty: "1",
+    });
+  }, []);
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-md mx-auto mt-8 p-6 bg-gray-100 rounded-lg shadow-md dark:bg-zinc-800"
+      className="m-8 p-6 bg-gray-100 rounded-lg shadow-md dark:bg-zinc-800"
     >
       <h2 className="text-xl font-bold mb-4">Add New Assignment</h2>
       <div className="mb-4">
