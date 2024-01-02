@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ADD_ASSIGNMENT } from "../redux/constant";
+import "./NewAssignmentForm.css";
 
 const NewAssignmentForm = ({ onFormSubmit }) => {
   let userData = useSelector((state) => state.userDataReducer);
