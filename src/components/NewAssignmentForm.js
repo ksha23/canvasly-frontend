@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ADD_ASSIGNMENT } from "../redux/constant";
+import TextAreaAutosize from "react-textarea-autosize";
 
 const NewAssignmentForm = ({ onFormSubmit }) => {
   let userData = useSelector((state) => state.userDataReducer);
@@ -75,7 +76,7 @@ const NewAssignmentForm = ({ onFormSubmit }) => {
         <label htmlFor="name" className="block mb-2">
           Name:
         </label>
-        <input
+        <TextAreaAutosize
           type="text"
           id="name"
           name="name"

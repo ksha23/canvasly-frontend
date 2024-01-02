@@ -75,6 +75,7 @@ const SettingsForm = () => {
   // ------------------ Render ----------------------
 
   useEffect(() => {
+    applyTheme();
     if (!userData) return;
     setTheCalendarId(userData.calendarId || "");
     setDueDateWeight(userData.dueDateWeight || "");

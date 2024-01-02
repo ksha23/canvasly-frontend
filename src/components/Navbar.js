@@ -63,24 +63,28 @@ const Navbar = () => {
           >
             Home
           </Link>
-          <Link
-            to="/assignments"
-            className={
-              isActiveLink("/assignments") +
-              " text-white text-s md:text-base lg:text-base"
-            }
-          >
-            Assignments
-          </Link>
-          <Link
-            to="/settings"
-            className={
-              isActiveLink("/settings") +
-              " text-white text-s md:text-base lg:text-base"
-            }
-          >
-            Settings
-          </Link>
+          {isLoggedIn && (
+            <Link
+              to="/assignments"
+              className={
+                isActiveLink("/assignments") +
+                " text-white text-s md:text-base lg:text-base"
+              }
+            >
+              Assignments
+            </Link>
+          )}
+          {isLoggedIn && (
+            <Link
+              to="/settings"
+              className={
+                isActiveLink("/settings") +
+                " text-white text-s md:text-base lg:text-base"
+              }
+            >
+              Settings
+            </Link>
+          )}
         </div>
         <div className="flex items-center">
           <div className="user-profile">
