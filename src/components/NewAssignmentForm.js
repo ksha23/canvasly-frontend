@@ -4,6 +4,8 @@ import { ADD_ASSIGNMENT } from "../redux/constant";
 
 const NewAssignmentForm = ({ onFormSubmit }) => {
   let userData = useSelector((state) => state.userDataReducer);
+  const [utcDateTime, setUtcDateTime] = useState("");
+
   const [assignment, setAssignment] = useState({
     name: "",
     dueDate: "",
@@ -14,17 +16,31 @@ const NewAssignmentForm = ({ onFormSubmit }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     if (name === "dueDate") {
+      const localDate = new Date(value);
+      const utcDate = localDate.toISOString();
       setAssignment({ ...assignment, [name]: value });
-    } else {
-      setAssignment({ ...assignment, [name]: value });
+      setUtcDateTime(utcDate);
+      return;
     }
+
+    setAssignment({ ...assignment, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let calendarId = userData.calendarId;
-    let data = { assignment, calendarId };
+
+    const data = {
+      assignment: {
+        name: assignment.name,
+        dueDate: utcDateTime,
+        type: assignment.type,
+        difficulty: assignment.difficulty,
+      },
+      calendarId: userData.calendarId,
+    };
+
     dispatch({ type: ADD_ASSIGNMENT, payload: { data } });
 
     setAssignment({
@@ -33,6 +49,8 @@ const NewAssignmentForm = ({ onFormSubmit }) => {
       type: "Other",
       difficulty: "1",
     });
+
+    setUtcDateTime("");
 
     onFormSubmit();
   };
@@ -44,6 +62,7 @@ const NewAssignmentForm = ({ onFormSubmit }) => {
       type: "Other",
       difficulty: "1",
     });
+    setUtcDateTime("");
   }, []);
 
   return (

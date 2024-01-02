@@ -22,7 +22,6 @@ const EventComponent = ({
 }) => {
   const dispatch = useDispatch();
   const formattedDateTime = new Date(dateTime);
-  console.log("name", name, "formattedDateTime", formattedDateTime);
 
   // ----------------------- State Variables ---------------------------
 
