@@ -1,26 +1,16 @@
+import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/Home";
 import AssignmentPage from "./pages/Assignments";
 import SettingsPage from "./pages/Settings";
 import ErrorBoundary from "./components/ErrorBoundary";
+import applyTheme from "./utils/colorThemeHandler";
 
 function App() {
-  function applyTheme() {
-    if (
-      localStorage.theme === "dark" ||
-      (!("theme" in localStorage) &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }
-
   applyTheme();
 
   return (
-    <div>
+    <>
       <BrowserRouter>
         <ErrorBoundary>
           <div>
@@ -32,7 +22,7 @@ function App() {
           </div>
         </ErrorBoundary>
       </BrowserRouter>
-    </div>
+    </>
   );
 }
 

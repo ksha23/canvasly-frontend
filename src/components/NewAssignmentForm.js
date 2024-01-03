@@ -7,6 +7,19 @@ import TextField from "@mui/material/TextField";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import applyTheme from "../utils/colorThemeHandler";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
+
+const lightTheme = createTheme({
+  palette: {
+    mode: "light",
+  },
+});
 
 const NewAssignmentForm = ({ onFormSubmit }) => {
   window
@@ -27,7 +40,6 @@ const NewAssignmentForm = ({ onFormSubmit }) => {
   let userData = useSelector((state) => state.userDataReducer);
   const [utcDateTime, setUtcDateTime] = useState("");
   const [theColorTheme, setColorTheme] = useState(localStorage.theme);
-
   const [assignment, setAssignment] = useState({
     name: "",
     dueDate: null,
@@ -71,7 +83,6 @@ const NewAssignmentForm = ({ onFormSubmit }) => {
     });
 
     setUtcDateTime("");
-
     onFormSubmit();
   };
 
@@ -129,26 +140,30 @@ const NewAssignmentForm = ({ onFormSubmit }) => {
           <label htmlFor="dueDate" className="block mb-2">
             Due Date:
           </label>
-          <DateTimePicker
-            slotProps={{
-              textField: {
-                size: "small",
-              },
-            }}
-            className="w-full bg-white dark:bg-zinc-600 rounded-md"
-            sx={{
-              ".MuiOutlinedInput-root": {
-                color: theColorTheme === "dark" ? "white" : "black",
-                borderRadius: "5px",
-              },
-              ".MuiSvgIcon-root": {
-                color: theColorTheme === "dark" ? "lightgray" : "gray",
-              },
-            }}
-            textField={(props) => <TextField {...props} variant="standard" />}
-            value={assignment.dueDate}
-            onChange={(value) => handleDateChange(value)}
-          />
+          <ThemeProvider
+            theme={theColorTheme === "dark" ? darkTheme : lightTheme}
+          >
+            <DateTimePicker
+              slotProps={{
+                textField: {
+                  size: "small",
+                },
+              }}
+              className="w-full bg-white dark:bg-zinc-600 rounded-md"
+              sx={{
+                ".MuiOutlinedInput-root": {
+                  color: theColorTheme === "dark" ? "white" : "black",
+                  borderRadius: "5px",
+                },
+                ".MuiSvgIcon-root": {
+                  color: theColorTheme === "dark" ? "lightgray" : "gray",
+                },
+              }}
+              textField={(props) => <TextField {...props} variant="standard" />}
+              value={assignment.dueDate}
+              onChange={(value) => handleDateChange(value)}
+            />
+          </ThemeProvider>
         </div>
 
         <div className="mb-4">
