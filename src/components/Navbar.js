@@ -11,17 +11,23 @@ import { getAssignments } from "../redux/actions/assignmentListActions";
 const Navbar = () => {
   var userData = useSelector((state) => state.userDataReducer);
   var isLoggedIn = useSelector((state) => state.loginStateReducer);
+  var calendarData = useSelector((state) => state.calendarDataReducer);
+  var assignments = useSelector((state) => state.assignmentsListReducer);
+  console.log(assignments);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
 
   useEffect(() => {
-    dispatch(fetchUserData());
-    if (isLoggedIn) {
-      dispatch(getAssignments());
+    if (isLoggedIn == false || userData == {}) dispatch(fetchUserData());
+
+    if (isLoggedIn && !userData) dispatch(fetchUserData());
+
+    if (isLoggedIn && calendarData.length == 0)
       dispatch({ type: GET_CALENDAR_DATA });
-    }
-  }, [dispatch, isLoggedIn]);
+
+    if (isLoggedIn && assignments.length == 0) dispatch(getAssignments());
+  }, [isLoggedIn]);
 
   // ------------------ Navbar ----------------------
 
