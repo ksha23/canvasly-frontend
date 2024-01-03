@@ -13,7 +13,6 @@ const Navbar = () => {
   var isLoggedIn = useSelector((state) => state.loginStateReducer);
   var calendarData = useSelector((state) => state.calendarDataReducer);
   var assignments = useSelector((state) => state.assignmentsListReducer);
-  console.log(assignments);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();

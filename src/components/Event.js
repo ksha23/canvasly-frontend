@@ -210,9 +210,6 @@ const EventComponent = ({
         <p className="text-md">
           <span className="font-semibold">Due: </span>
           {formatDate(formattedDateTime)}{" "}
-          {`(${Math.floor(
-            (formattedDateTime - new Date()) / (1000 * 60 * 60 * 24)
-          )} days)`}
         </p>
 
         {/* Difficulty and Type */}

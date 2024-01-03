@@ -108,66 +108,68 @@ const SettingsForm = () => {
                 ))}
               </select>
             )}
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <p className="mb-2 font-semibold">Choose weights for sorting:</p>
+            <div className="grid grid-cols-3 gap-4">
               <div>
                 <label className="font-semibold" htmlFor="dueDateWeight">
-                  Weight for due date:
+                  Due date:
                 </label>
                 <input
                   id="dueDateWeight"
                   type="number"
                   value={dueDateWeight}
                   onChange={(e) => setDueDateWeight(e.target.value)}
-                  className="block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 px-2 py-2 mt-2 dark:bg-zinc-600"
+                  className="block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 px-2 py-2 mt-2 text-center dark:bg-zinc-600"
                 />
               </div>
 
               <div>
                 <label className="font-semibold" htmlFor="typeWeight">
-                  Weight for type:
+                  Type:
                 </label>
                 <input
                   id="typeWeight"
                   type="number"
                   value={typeWeight}
                   onChange={(e) => setTypeWeight(e.target.value)}
-                  className="block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 px-2 py-2 mt-2 dark:bg-zinc-600"
+                  className="block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 px-2 py-2 mt-2 text-center dark:bg-zinc-600"
                 />
               </div>
 
               <div>
                 <label className="font-semibold" htmlFor="difficultyWeight">
-                  Weight for difficulty:
+                  Difficulty:
                 </label>
                 <input
                   id="difficultyWeight"
                   type="number"
                   value={difficultyWeight}
                   onChange={(e) => setDifficultyWeight(e.target.value)}
-                  className="block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 px-2 py-2 mt-2 dark:bg-zinc-600"
+                  className="block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 px-2 py-2 mt-2 text-center dark:bg-zinc-600"
                 />
               </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 mt-4 gap-4">
               <button
                 type="button"
                 className="bg-indigo-300 hover:bg-indigo-400 text-black py-2 px-4 rounded"
                 onClick={() => handleThemeChange("light")}
               >
-                Light Mode
+                Light
               </button>
               <button
                 type="button"
                 className="bg-indigo-800 hover:bg-indigo-900 text-white py-2 px-4 rounded"
                 onClick={() => handleThemeChange("dark")}
               >
-                Dark Mode
+                Dark
               </button>
               <button
                 type="button"
                 className="bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded"
                 onClick={() => handleThemeChange("system")}
               >
-                System Color
+                System
               </button>
             </div>
 

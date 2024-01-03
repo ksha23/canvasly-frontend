@@ -130,7 +130,7 @@ function AssignmentsPage() {
                   setShowForm(true);
                 }}
               >
-                + Assignment
+                Add new assignment
               </button>
             </section>
 
@@ -172,10 +172,6 @@ function AssignmentsPage() {
                   <p className="text-center">No assignments found</p>
                 ))}
             </div>
-
-            {/* <section>
-            <h2 className="text-2xl font-bold">Completed Assignments:</h2>
-          </section> */}
           </main>
         </div>
       )}
