@@ -1,21 +1,5 @@
-// const setCalendarId = async (calendarId) => {
-//   const response = await fetch(
-//     `${process.env.REACT_APP_API_URL}/api/v1/users/setCalendarId`,
-//     {
-//       method: "put",
-//       credentials: "include",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({ calendarId }),
-//     }
-//   );
-//   const data = await response.json();
-//   return data;
-// };
-
 import { takeEvery, put } from "redux-saga/effects";
-import { SET_CALENDAR_ID } from "../constant";
+import { GET_ASSIGNMENTS, SET_CALENDAR_ID } from "../constant";
 
 // worker saga
 function* setCalendarIdWorker(action) {
@@ -32,6 +16,7 @@ function* setCalendarIdWorker(action) {
     }
   );
   const data = yield response.json();
+  yield put({ type: GET_ASSIGNMENTS });
 }
 
 // watcher saga
