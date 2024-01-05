@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -10,6 +10,24 @@ import { deleteAssignmentReminderAction } from "../redux/actions/assignmentListA
 import { addAssignmentReminderAction } from "../redux/actions/assignmentListActions";
 import { updateAssignmentReminderArray } from "../redux/actions/assignmentListActions";
 import TextAreaAutoSize from "react-textarea-autosize";
+
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import { ThemeProvider } from "@emotion/react";
+import { createTheme } from "@mui/material/styles";
+import applyTheme from "../utils/colorThemeHandler";
+
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
+
+const lightTheme = createTheme({
+  palette: {
+    mode: "light",
+  },
+});
 
 const EventComponent = ({
   id,
@@ -24,6 +42,23 @@ const EventComponent = ({
   const formattedDateTime = new Date(dateTime);
 
   // ----------------------- State Variables ---------------------------
+
+  const [theColorTheme, setColorTheme] = useState(localStorage.theme);
+
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", (event) => {
+      if (
+        localStorage.theme === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        setColorTheme("dark");
+      } else {
+        setColorTheme("light");
+      }
+      applyTheme();
+    });
 
   // used to determine if the event is edited (add border if edited)
   const [edited, setEdited] = useState(false);
@@ -175,6 +210,15 @@ const EventComponent = ({
 
   // ------------------------- Render -------------------------
 
+  useEffect(() => {
+    if (!localStorage.theme || localStorage.theme === "") {
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      setColorTheme(prefersDark ? "dark" : "light");
+    }
+  }, []);
+
   return (
     <div
       /* Determines if we need edited border or not */
@@ -213,34 +257,38 @@ const EventComponent = ({
         </p>
 
         {/* Difficulty and Type */}
-        <div className="md:flex">
+        <div className="md:flex md:items-center">
           <div className="flex justify-between md:justify-normal">
-            <select
-              className="mr-2 px-2 py-2 rounded text-sm mt-2 w-1/2 md:w-auto dark:bg-zinc-600"
-              onChange={(e) => {
-                handleEdited(id, e.target.value, theType);
-              }}
-              value={theDifficulty}
+            <ThemeProvider
+              theme={theColorTheme === "dark" ? darkTheme : lightTheme}
             >
-              <option value="1">Difficulty 1</option>
-              <option value="2">Difficulty 2</option>
-              <option value="3">Difficulty 3</option>
-              <option value="4">Difficulty 4</option>
-              <option value="5">Difficulty 5</option>
-            </select>
-            <select
-              className="mr-2 px-2 py-2 rounded text-sm mt-2 w-1/2 md:w-auto dark:bg-zinc-600"
-              onChange={(e) => {
-                handleEdited(id, theDifficulty, e.target.value);
-              }}
-              value={theType}
-            >
-              <option value="Assignment">Assignment</option>
-              <option value="Quiz">Quiz</option>
-              <option value="Exam">Exam</option>
-              <option value="Project">Project</option>
-              <option value="Other">Other</option>
-            </select>
+              <Select
+                className="mr-2 bg-white rounded text-sm w-1/2 mt-2 dark:text-white dark:bg-zinc-700 md:w-auto"
+                value={theDifficulty}
+                onChange={(e) => {
+                  handleEdited(id, e.target.value, theType);
+                }}
+              >
+                <MenuItem value="1">Difficulty 1</MenuItem>
+                <MenuItem value="2">Difficulty 2</MenuItem>
+                <MenuItem value="3">Difficulty 3</MenuItem>
+                <MenuItem value="4">Difficulty 4</MenuItem>
+                <MenuItem value="5">Difficulty 5</MenuItem>
+              </Select>
+              <Select
+                className="mr-2 bg-white rounded text-sm w-1/2 mt-2 dark:text-white dark:bg-zinc-700 md:w-auto"
+                value={theType}
+                onChange={(e) => {
+                  handleEdited(id, theDifficulty, e.target.value);
+                }}
+              >
+                <MenuItem value="Assignment">Assignment</MenuItem>
+                <MenuItem value="Quiz">Quiz</MenuItem>
+                <MenuItem value="Exam">Exam</MenuItem>
+                <MenuItem value="Project">Project</MenuItem>
+                <MenuItem value="Other">Other</MenuItem>
+              </Select>
+            </ThemeProvider>
           </div>
 
           {/* Update and Undo Buttons */}

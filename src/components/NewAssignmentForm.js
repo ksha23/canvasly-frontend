@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { ADD_ASSIGNMENT } from "../redux/constant";
 import TextAreaAutosize from "react-textarea-autosize";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import TextField from "@mui/material/TextField";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import applyTheme from "../utils/colorThemeHandler";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
 const darkTheme = createTheme({
   palette: {
@@ -49,6 +50,7 @@ const NewAssignmentForm = ({ onFormSubmit }) => {
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
+    console.log(e);
     const { name, value } = e.target;
     setAssignment({ ...assignment, [name]: value });
   };
@@ -103,123 +105,99 @@ const NewAssignmentForm = ({ onFormSubmit }) => {
   }, []);
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <form
-        onSubmit={handleSubmit}
-        className="w-full max-w-lg m-10 p-5 bg-gray-100 rounded-lg shadow-md dark:bg-zinc-800"
-      >
-        <h2 className="text-xl font-bold mb-4">Add New Assignment</h2>
-        <div className="mb-4">
-          <label htmlFor="name" className="block mb-2">
-            Name:
-          </label>
-          <TextAreaAutosize
-            type="text"
-            id="name"
-            name="name"
-            value={assignment.name}
-            onChange={handleChange}
-            placeholder="Assignment Name"
-            className="w-full rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 dark:text-white dark:bg-zinc-600"
-          />
-        </div>
-        {/* <div className="mb-4">
-        <label htmlFor="dueDate" className="block mb-2">
-          Due Date:
-        </label>
-        <input
-          type="datetime-local"
-          id="dueDate"
-          name="dueDate"
-          value={assignment.dueDate}
-          onChange={handleChange}
-          className="duedate-input w-full rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 dark:text-white dark:bg-zinc-600"
-        />
-      </div> */}
-        <div className="mb-4">
-          <label htmlFor="dueDate" className="block mb-2">
-            Due Date:
-          </label>
+    <div className="flex justify-center items-center w-full m-10 mt-10 md:mt-20">
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <form
+          onSubmit={handleSubmit}
+          className="w-full max-w-lg p-5 bg-gray-100 rounded-lg dark:bg-zinc-800 md:p-8"
+        >
+          <div className="flex justify-between items-center mb-2">
+            <h2 className="text-xl font-bold md:text-2xl">
+              Add New Assignment
+            </h2>
+            <button
+              onClick={onFormSubmit}
+              className="text-zinc-500 w-10 h-10 text-xl"
+            >
+              X
+            </button>
+          </div>
+          <div className="mb-3">
+            <label htmlFor="name" className="block mb-2">
+              Name:
+            </label>
+            <TextAreaAutosize
+              type="text"
+              id="name"
+              name="name"
+              value={assignment.name}
+              onChange={handleChange}
+              placeholder="Assignment Name"
+              className="w-full rounded-md py-4 px-4 focus:outline-none focus:border-blue-500 dark:text-white dark:bg-zinc-600"
+            />
+          </div>
           <ThemeProvider
             theme={theColorTheme === "dark" ? darkTheme : lightTheme}
           >
-            <DateTimePicker
-              slotProps={{
-                textField: {
-                  size: "small",
-                },
-              }}
-              className="w-full bg-white dark:bg-zinc-600 rounded-md"
-              sx={{
-                ".MuiOutlinedInput-root": {
-                  color: theColorTheme === "dark" ? "white" : "black",
-                  borderRadius: "5px",
-                },
-                ".MuiSvgIcon-root": {
-                  color: theColorTheme === "dark" ? "lightgray" : "gray",
-                },
-              }}
-              textField={(props) => <TextField {...props} variant="standard" />}
-              value={assignment.dueDate}
-              onChange={(value) => handleDateChange(value)}
-            />
+            <div className="mb-4">
+              <label htmlFor="dueDate" className="block mb-2">
+                Due Date:
+              </label>
+
+              <DateTimePicker
+                className="w-full bg-white dark:bg-zinc-600 border-none"
+                value={assignment.dueDate}
+                onChange={(value) => handleDateChange(value)}
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="type" className="block mb-2">
+                Type:
+              </label>
+              <Select
+                id="type"
+                name="type"
+                value={assignment.type}
+                onChange={(value) => handleChange(value)}
+                className="w-full bg-white rounded-md dark:text-white dark:bg-zinc-600"
+              >
+                <MenuItem value="Other">Other</MenuItem>
+                <MenuItem value="Assignment">Assignment</MenuItem>
+                <MenuItem value="Quiz">Quiz</MenuItem>
+                <MenuItem value="Project">Project</MenuItem>
+                <MenuItem value="Exam">Exam</MenuItem>
+              </Select>
+            </div>
+            <div className="mb-4">
+              <label htmlFor="difficulty" className="block mb-2">
+                Difficulty:
+              </label>
+              <Select
+                id="difficulty"
+                name="difficulty"
+                value={assignment.difficulty}
+                onChange={handleChange}
+                className="w-full bg-white rounded-md focus:outline-none focus:border-blue-500 dark:text-white dark:bg-zinc-600"
+              >
+                <MenuItem value="1">Difficulty 1</MenuItem>
+                <MenuItem value="2">Difficulty 2</MenuItem>
+                <MenuItem value="3">Difficulty 3</MenuItem>
+                <MenuItem value="4">Difficulty 4</MenuItem>
+                <MenuItem value="5">Difficulty 5</MenuItem>
+              </Select>
+            </div>
           </ThemeProvider>
-        </div>
-
-        <div className="mb-4">
-          <label htmlFor="type" className="block mb-2">
-            Type:
-          </label>
-          <select
-            id="type"
-            name="type"
-            value={assignment.type}
-            onChange={handleChange}
-            className="w-full rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 dark:text-white dark:bg-zinc-600"
-          >
-            <option value="Other">Other</option>
-            <option value="Assignment">Assignment</option>
-            <option value="Quiz">Quiz</option>
-            <option value="Project">Project</option>
-            <option value="Exam">Exam</option>
-            {/* Add other options as needed */}
-          </select>
-        </div>
-        <div className="mb-4">
-          <label htmlFor="difficulty" className="block mb-2">
-            Difficulty:
-          </label>
-          <select
-            id="difficulty"
-            required
-            name="difficulty"
-            value={assignment.difficulty}
-            onChange={handleChange}
-            className="w-full rounded-md py-2 px-3 focus:outline-none focus:border-blue-500 dark:text-white dark:bg-zinc-600"
-          >
-            <option value="1">Difficulty 1</option>
-            <option value="2">Difficulty 2</option>
-            <option value="3">Difficulty 3</option>
-            <option value="4">Difficulty 4</option>
-            <option value="5">Difficulty 5</option>
-
-            {/* Add other options as needed */}
-          </select>
-        </div>
-        <button
-          type="submit"
-          className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
-        >
-          Add Assignment
-        </button>
-        <button
-          onClick={onFormSubmit}
-          className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 ml-2"
-        >
-          Cancel
-        </button>
-      </form>
-    </LocalizationProvider>
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 mt-4 items-center"
+            >
+              Add Assignment
+            </button>
+          </div>
+        </form>
+      </LocalizationProvider>
+    </div>
   );
 };
 
