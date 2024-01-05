@@ -184,7 +184,7 @@ const SettingsForm = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 mt-2 gap-4">
               <button
                 type="button"
-                className="bg-zinc-200 hover:bg-zinc-300 text-black py-2 px-4 rounded"
+                className="bg-white hover:bg-zinc-100 text-black py-2 px-4 rounded"
                 onClick={() => handleThemeChange("light")}
               >
                 Light
