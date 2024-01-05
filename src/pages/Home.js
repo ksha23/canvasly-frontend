@@ -13,14 +13,14 @@ const HomePage = () => {
   return (
     <div className="dark:bg-black dark:text-white">
       <Navbar />
-      <div className="max-w-2xl mx-auto text-center py-2 p-10 mt-10">
+      <div className="max-w-3xl mx-auto text-center p-10 pt-5">
         <h1 className="text-4xl font-bold mb-4">Welcome to CanvasLy</h1>
         <p className="text-lg text-gray-600 mb-8 dark:text-slate-300">
           Empowering Students to Master Their Academic Journey
         </p>
 
         <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4 text-purple-600 dark:text-purple-500">
+          <h2 className="text-2xl font-bold mb-4 text-purple-600">
             Why Choose CanvasLy?
           </h2>
           <ul className="text-left list-disc ml-6 dark:text-slate-300">
@@ -37,7 +37,7 @@ const HomePage = () => {
         </div>
 
         <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4 text-purple-600 dark:text-purple-500">
+          <h2 className="text-2xl font-bold mb-4 text-purple-600">
             How to Get Started:
           </h2>
           <ol className="text-left list-decimal ml-6 dark:text-slate-300">

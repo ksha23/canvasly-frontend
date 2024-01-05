@@ -59,7 +59,7 @@ const Navbar = () => {
   return (
     <header className="py-4 px-6">
       <div className="mx-auto flex justify-between items-center">
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-3 md:space-x-4">
           <Link to="/">
             <img
               className="h-8 w-8 md:h-10 md:w-10"
@@ -67,6 +67,7 @@ const Navbar = () => {
               alt="Logo"
             />
           </Link>
+          {!isLoggedIn && <p>CanvasLy</p>}
           {isLoggedIn && (
             <Link
               to="/assignments"
@@ -101,7 +102,7 @@ const Navbar = () => {
           {!isLoggedIn && (
             <button className="px-1 py-1 rounded-md" onClick={() => auth()}>
               <img
-                className="h-5 md:h-8"
+                className="h-7 md:h-8"
                 src={process.env.PUBLIC_URL + "/sign-in2.png"}
                 alt="Sign In"
               />

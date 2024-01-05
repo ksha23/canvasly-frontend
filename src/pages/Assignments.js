@@ -137,7 +137,7 @@ function AssignmentsPage() {
           <NewAssignmentForm onFormSubmit={handleFormClose} />
         </div>
       ) : (
-        <div className="p-10">
+        <div className="p-10 pt-5">
           <main className="max-w-4xl mx-auto">
             <section>
               <h2 className="text-2xl font-bold">Canvas Assignments:</h2>

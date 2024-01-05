@@ -10,7 +10,6 @@ import MenuItem from "@mui/material/MenuItem";
 import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material/styles";
 import applyTheme from "../utils/colorThemeHandler";
-import { set } from "lodash";
 
 const darkTheme = createTheme({
   palette: {
