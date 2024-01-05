@@ -192,21 +192,21 @@ const SettingsForm = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 mt-4 gap-4">
               <button
                 type="button"
-                className="bg-indigo-300 hover:bg-indigo-400 text-black py-2 px-4 rounded"
+                className="bg-zinc-200 hover:bg-zinc-300 text-black py-2 px-4 rounded"
                 onClick={() => handleThemeChange("light")}
               >
                 Light
               </button>
               <button
                 type="button"
-                className="bg-indigo-800 hover:bg-indigo-900 text-white py-2 px-4 rounded"
+                className="bg-zinc-600 hover:bg-zinc-700 text-white py-2 px-4 rounded"
                 onClick={() => handleThemeChange("dark")}
               >
                 Dark
               </button>
               <button
                 type="button"
-                className="bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded"
+                className="bg-violet-600 hover:bg-violet-700 text-white py-2 px-4 rounded"
                 onClick={() => handleThemeChange("system")}
               >
                 System
@@ -214,7 +214,7 @@ const SettingsForm = () => {
             </div>
 
             {error && <div className="text-red-500">{error}</div>}
-            <button className="mt-4 bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded">
+            <button className="mt-4 bg-violet-600 hover:bg-violet-700 text-white py-2 px-4 rounded">
               Save Settings
             </button>
           </form>

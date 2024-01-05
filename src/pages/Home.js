@@ -20,7 +20,7 @@ const HomePage = () => {
         </p>
 
         <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4 text-blue-500 dark:text-blue-400">
+          <h2 className="text-2xl font-bold mb-4 text-purple-600 dark:text-purple-500">
             Why Choose CanvasLy?
           </h2>
           <ul className="text-left list-disc ml-6 dark:text-slate-300">
@@ -37,7 +37,7 @@ const HomePage = () => {
         </div>
 
         <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4 text-blue-500 dark:text-blue-400">
+          <h2 className="text-2xl font-bold mb-4 text-purple-600 dark:text-purple-500">
             How to Get Started:
           </h2>
           <ol className="text-left list-decimal ml-6 dark:text-slate-300">

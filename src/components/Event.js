@@ -227,16 +227,16 @@ const EventComponent = ({
       <div
         className={
           formattedDateTime < new Date()
-            ? "bg-red-500 rounded-tl-md rounded-tr-md"
+            ? "bg-rose-600 rounded-tl-md rounded-tr-md text-white"
             : formattedDateTime.toDateString() === new Date().toDateString()
-            ? "bg-yellow-500 rounded-tl-md rounded-tr-md"
-            : "bg-blue-500 rounded-tl-md rounded-tr-md"
+            ? "bg-yellow-600 rounded-tl-md rounded-tr-md text-white"
+            : "bg-violet-600 rounded-tl-md rounded-tr-md text-white"
         }
       >
         <div className="flex justify-between items-center">
-          <h3 className="text-lg font-bold text-white py-2 px-4">
+          <h3 className="text-lg font-bold py-2 px-4">
             {displayName}
-            <span className="text-white">{name.replace(/\[.*?\]/, "")}</span>
+            <span>{name.replace(/\[.*?\]/, "")}</span>
           </h3>
           {/* Complete Button */}
           <button

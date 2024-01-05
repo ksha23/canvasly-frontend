@@ -57,24 +57,22 @@ const Navbar = () => {
   }
 
   return (
-    <header className="bg-blue-500 py-4 px-6">
+    <header className="py-4 px-6">
       <div className="mx-auto flex justify-between items-center">
-        <div className="flex items-center space-x-4">
-          <Link
-            to="/"
-            className={
-              isActiveLink("/") + " text-white text-s md:text-base lg:text-base"
-            }
-          >
-            Home
+        <div className="flex items-center space-x-3">
+          <Link to="/">
+            <img
+              className="h-8 w-8 md:h-10 md:w-10"
+              src={process.env.PUBLIC_URL + "/canvasly.svg"}
+              alt="Logo"
+            />
           </Link>
           {isLoggedIn && (
             <Link
               to="/assignments"
-              className={
-                isActiveLink("/assignments") +
-                " text-white text-s md:text-base lg:text-base"
-              }
+              className={`text-black text-s md:text-base dark:text-white ${isActiveLink(
+                "/assignments"
+              )}`}
             >
               Assignments
             </Link>
@@ -82,10 +80,9 @@ const Navbar = () => {
           {isLoggedIn && (
             <Link
               to="/settings"
-              className={
-                isActiveLink("/settings") +
-                " text-white text-s md:text-base lg:text-base"
-              }
+              className={`text-black text-s md:text-base dark:text-white ${isActiveLink(
+                "/settings"
+              )}`}
             >
               Settings
             </Link>
@@ -112,7 +109,7 @@ const Navbar = () => {
           )}
           {isLoggedIn && (
             <button
-              className="rounded-md text-white text-sm pl-2"
+              className="rounded-md text-black text-sm pl-2 dark:text-white"
               onClick={() => logout()}
             >
               Log Out

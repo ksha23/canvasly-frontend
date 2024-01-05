@@ -190,7 +190,7 @@ const NewAssignmentForm = ({ onFormSubmit }) => {
           <div className="flex justify-center">
             <button
               type="submit"
-              className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 mt-4 items-center"
+              className="bg-violet-600 text-white py-2 px-4 rounded-md hover:bg-violet-700 mt-4 items-center"
             >
               Add Assignment
             </button>

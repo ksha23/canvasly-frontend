@@ -1,16 +1,11 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Canvasly",
+  "name": "Better assignment organizer",
   "icons": [
     {
-      "src": "favicon.png",
-      "sizes": "694x680",
+      "src": "canvasly.svg",
+      "sizes": "500x500",
       "type": "image/x-icon"
-    },
-    {
-      "src": "CanvasLy.png",
-      "type": "image/png",
-      "sizes": "500x500"
     }
   ],
   "start_url": ".",

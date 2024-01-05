@@ -111,6 +111,22 @@ function AssignmentsPage() {
     setShowForm(false);
   };
 
+  const onHandleRefreshDueDates = async () => {
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/api/v1/assignments/refresh`,
+      {
+        method: "post",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+    return data;
+  };
+
   // ------------------ Render ----------------------
 
   return (
@@ -149,6 +165,9 @@ function AssignmentsPage() {
                 </p>
               )}
             </section>
+            {/* <button onClick={() => onHandleRefreshDueDates()}>
+              Refresh Due Dates
+            </button> */}
 
             <div>
               {events &&
