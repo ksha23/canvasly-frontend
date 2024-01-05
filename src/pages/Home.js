@@ -2,6 +2,7 @@ import Navbar from "../components/Navbar";
 import "./Home.css";
 import Youtube from "../components/Youtube";
 import applyTheme from "../utils/colorThemeHandler";
+import Footer from "../components/Footer";
 
 const HomePage = () => {
   window
@@ -11,7 +12,7 @@ const HomePage = () => {
     });
 
   return (
-    <div className="dark:bg-black dark:text-white">
+    <div className="dark:bg-black dark:text-white h-screen">
       <Navbar />
       <div className="max-w-3xl mx-auto text-center p-10 pt-5">
         <h1 className="text-4xl font-bold mb-4">Welcome to CanvasLy</h1>
@@ -60,6 +61,7 @@ const HomePage = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

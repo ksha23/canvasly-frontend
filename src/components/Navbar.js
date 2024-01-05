@@ -57,7 +57,7 @@ const Navbar = () => {
   }
 
   return (
-    <header className="py-4 px-6">
+    <header className="py-4 px-6 sticky top-0 z-50 bg-white dark:bg-black">
       <div className="mx-auto flex justify-between items-center">
         <div className="flex items-center space-x-3 md:space-x-4">
           <Link to="/">

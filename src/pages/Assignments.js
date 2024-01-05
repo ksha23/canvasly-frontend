@@ -8,6 +8,7 @@ import { getAssignments } from "../redux/actions/assignmentListActions";
 import { getSortedAssignments } from "../redux/selectors/assignmentListSelector";
 import NewAssignmentForm from "../components/NewAssignmentForm";
 import applyTheme from "../utils/colorThemeHandler";
+import Footer from "../components/Footer";
 
 function AssignmentsPage() {
   const dispatch = useDispatch();
@@ -130,14 +131,14 @@ function AssignmentsPage() {
   // ------------------ Render ----------------------
 
   return (
-    <div className="dark:bg-black dark:text-white">
+    <div className="dark:bg-black dark:text-white h-screen">
       <Navbar />
       {showForm ? (
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center h-screen">
           <NewAssignmentForm onFormSubmit={handleFormClose} />
         </div>
       ) : (
-        <div className="p-10 pt-5">
+        <div className="p-10 pt-5 h-screen">
           <main className="max-w-4xl mx-auto">
             <section>
               <h2 className="text-2xl font-bold">Canvas Assignments:</h2>
@@ -195,6 +196,7 @@ function AssignmentsPage() {
           </main>
         </div>
       )}
+      <Footer />
     </div>
   );
 }

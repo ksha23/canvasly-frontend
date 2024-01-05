@@ -1,3 +1,4 @@
+import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import SettingsForm from "../components/SettingsForm";
 import applyTheme from "../utils/colorThemeHandler";
@@ -12,12 +13,13 @@ const SettingsPage = () => {
   return (
     <div className="dark:bg-black dark:text-white">
       <Navbar />
-      <div className="p-10 pt-5 max-w-4xl mx-auto text-center">
+      <div className="p-10 pt-5 max-w-4xl mx-auto text-center h-screen">
         <h2 className="text-2xl font-bold mb-4">Settings</h2>
         <div className="bg-zinc-100 dark:bg-zinc-800 p-6 rounded-md">
           <SettingsForm />
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
