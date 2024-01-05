@@ -344,7 +344,7 @@ const EventComponent = ({
                     </p>
                   )}
                   <button
-                    className="text-slate-600 ml-4 text-default dark:text-slate-400"
+                    className="text-zinc-600 ml-4 text-default dark:text-zinc-400"
                     onClick={() => removeReminder(index)}
                   >
                     ⓧ
@@ -366,7 +366,7 @@ const EventComponent = ({
               autoFocus
             />
             <button
-              className="text-sm bg-blue-500 text-white px-3 py-1 rounded max-h-9"
+              className="text-sm bg-violet-600 text-white px-3 py-1 rounded max-h-9"
               onClick={addReminder}
             >
               Add
@@ -374,7 +374,7 @@ const EventComponent = ({
           </div>
         ) : (
           <button
-            className="text-sm text-slate-600 px-2 py-2 rounded underline dark:text-slate-400"
+            className="text-sm text-zinc-500 px-2 py-2 rounded underline dark:text-zinc-400"
             onClick={() => setShowAddReminder(true)}
           >
             Add Reminder

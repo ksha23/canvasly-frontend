@@ -145,14 +145,10 @@ const SettingsForm = () => {
                 </Select>
               )}
             </ThemeProvider>
-            <p className="mt-4 mb-2 font-semibold">
-              Choose weights for sorting:
-            </p>
-            <div className="grid grid-cols-3 gap-4">
+            <p className="mt-4 font-semibold">Choose weights for sorting:</p>
+            <div className="grid grid-cols-3 gap-4 mt-2">
               <div>
-                <label className="font-semibold" htmlFor="dueDateWeight">
-                  Due date:
-                </label>
+                <label htmlFor="dueDateWeight">Due date:</label>
                 <input
                   id="dueDateWeight"
                   type="number"
@@ -163,9 +159,7 @@ const SettingsForm = () => {
               </div>
 
               <div>
-                <label className="font-semibold" htmlFor="typeWeight">
-                  Type:
-                </label>
+                <label htmlFor="typeWeight">Type</label>
                 <input
                   id="typeWeight"
                   type="number"
@@ -176,9 +170,7 @@ const SettingsForm = () => {
               </div>
 
               <div>
-                <label className="font-semibold" htmlFor="difficultyWeight">
-                  Difficulty:
-                </label>
+                <label htmlFor="difficultyWeight">Difficulty:</label>
                 <input
                   id="difficultyWeight"
                   type="number"
@@ -189,7 +181,7 @@ const SettingsForm = () => {
               </div>
             </div>
             <p className="mt-4 font-semibold">Choose a color theme:</p>
-            <div className="grid grid-cols-1 md:grid-cols-3 mt-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 mt-2 gap-4">
               <button
                 type="button"
                 className="bg-zinc-200 hover:bg-zinc-300 text-black py-2 px-4 rounded"

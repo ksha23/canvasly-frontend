@@ -145,6 +145,7 @@ function AssignmentsPage() {
                 onClick={() => {
                   setShowForm(true);
                 }}
+                className="text-sm underline text-zinc-500 dark:text-zinc-400"
               >
                 Add new assignment
               </button>
