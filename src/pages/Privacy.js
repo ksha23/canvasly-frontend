@@ -4,9 +4,9 @@ import Footer from "../components/Footer";
 
 const PrivacyPolicyPage = () => {
   return (
-    <div className="dark:bg-black dark:text-white h-screen">
+    <div className="flex flex-col dark:bg-black dark:text-white min-h-screen">
       <Navbar />
-      <div className="max-w-3xl mx-auto p-10 pt-5 h-screen">
+      <div className="flex-grow max-w-3xl mx-auto p-10 pt-5">
         <h1 className="text-4xl font-bold mb-8 text-center">Privacy Policy</h1>
 
         <section className="mb-8">

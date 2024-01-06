@@ -131,15 +131,15 @@ function AssignmentsPage() {
   // ------------------ Render ----------------------
 
   return (
-    <div className="dark:bg-black dark:text-white h-screen">
+    <div className="flex flex-col min-h-screen dark:bg-black dark:text-white">
       <Navbar />
       {showForm ? (
-        <div className="flex justify-center items-center h-screen">
+        <div className="flex-grow justify-center items-center">
           <NewAssignmentForm onFormSubmit={handleFormClose} />
         </div>
       ) : (
-        <div className="p-10 pt-5 h-screen">
-          <main className="max-w-4xl mx-auto">
+        <div className="p-10 pt-5 flex-grow">
+          <main className="max-w-4xl mx-auto flew-grow">
             <section>
               <h2 className="text-2xl font-bold">Canvas Assignments:</h2>
               <button

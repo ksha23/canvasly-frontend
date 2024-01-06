@@ -12,9 +12,9 @@ const HomePage = () => {
     });
 
   return (
-    <div className="dark:bg-black dark:text-white h-screen">
+    <div className="flex flex-col dark:bg-black dark:text-white min-h-screen">
       <Navbar />
-      <div className="max-w-3xl mx-auto text-center p-10 pt-5">
+      <div className="flex-grow max-w-3xl mx-auto text-center p-10 pt-5">
         <h1 className="text-4xl font-bold mb-4">Welcome to CanvasLy</h1>
         <p className="text-lg text-gray-600 mb-8 dark:text-slate-300">
           Empowering Students to Master Their Academic Journey
