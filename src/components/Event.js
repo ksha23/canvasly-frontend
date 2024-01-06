@@ -307,7 +307,7 @@ const EventComponent = ({
                 min={1}
                 max={5}
                 valueLabelDisplay="off"
-                className="ml-1 w-1/2 mt-2 text-white mr-8 md:ml-4"
+                className="ml-1 w-1/2 mt-2 text-zinc-600 mr-8 md:ml-4 dark:text-white"
               />
               <Select
                 className="bg-white rounded text-sm w-1/2 mt-2 dark:text-white dark:bg-zinc-700"
