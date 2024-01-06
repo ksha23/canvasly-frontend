@@ -115,7 +115,10 @@ const SettingsForm = () => {
       setColorTheme("dark");
     } else {
       localStorage.removeItem("theme");
-      setColorTheme("");
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      setColorTheme(prefersDark ? "dark" : "light");
     }
     applyTheme(); // Apply the theme after changing it
   }

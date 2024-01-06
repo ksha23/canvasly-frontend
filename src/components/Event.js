@@ -286,19 +286,6 @@ const EventComponent = ({
             <ThemeProvider
               theme={theColorTheme === "dark" ? darkTheme : lightTheme}
             >
-              {/* <Select
-                className="mr-2 bg-white rounded text-sm w-1/2 mt-2 dark:text-white dark:bg-zinc-700 md:w-auto"
-                value={theDifficulty}
-                onChange={(e) => {
-                  handleEdited(id, e.target.value, theType);
-                }}
-              >
-                <MenuItem value="1">Difficulty 1</MenuItem>
-                <MenuItem value="2">Difficulty 2</MenuItem>
-                <MenuItem value="3">Difficulty 3</MenuItem>
-                <MenuItem value="4">Difficulty 4</MenuItem>
-                <MenuItem value="5">Difficulty 5</MenuItem>
-              </Select> */}
               <Slider
                 value={theDifficulty}
                 onChange={(e, value) => handleEdited(id, value, theType)}
