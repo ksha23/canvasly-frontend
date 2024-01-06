@@ -134,66 +134,62 @@ function AssignmentsPage() {
     <div className="flex flex-col min-h-screen dark:bg-black dark:text-white">
       <Navbar />
       {showForm ? (
-        <div className="flex-grow justify-center items-center">
-          <NewAssignmentForm onFormSubmit={handleFormClose} />
-        </div>
+        <NewAssignmentForm onFormSubmit={handleFormClose} />
       ) : (
-        <div className="p-10 pt-5 flex-grow">
-          <main className="max-w-4xl mx-auto flew-grow">
-            <section>
-              <h2 className="text-2xl font-bold">Canvas Assignments:</h2>
-              <button
-                onClick={() => {
-                  setShowForm(true);
-                }}
-                className="text-sm underline text-zinc-500 dark:text-zinc-400"
-              >
-                Add new assignment
-              </button>
-            </section>
+        <div className="w-full max-w-4xl mx-auto flex-grow p-10 pt-5">
+          <section>
+            <h2 className="text-2xl font-bold">Canvas Assignments:</h2>
+            <button
+              onClick={() => {
+                setShowForm(true);
+              }}
+              className="text-sm underline text-zinc-500 dark:text-zinc-400"
+            >
+              Add new assignment
+            </button>
+          </section>
 
-            <section className="mb-4 flex justify-between items-center">
-              {updatedEvents.length > 0 && (
-                <button
-                  className="bg-green-600 text-white text-sm px-4 py-2 rounded-md mt-2"
-                  onClick={updateAllEvents}
-                >
-                  Update All
-                </button>
-              )}
-              {updatedEvents.length > 0 && (
-                <p className="dark:text-white">
-                  {updatedEvents.length} assignments edited
-                </p>
-              )}
-            </section>
-            {/* <button onClick={() => onHandleRefreshDueDates()}>
+          <section className="mb-4 flex justify-between items-center">
+            {updatedEvents.length > 0 && (
+              <button
+                className="bg-green-600 text-white text-sm px-4 py-2 rounded-md mt-2"
+                onClick={updateAllEvents}
+              >
+                Update All
+              </button>
+            )}
+            {updatedEvents.length > 0 && (
+              <p className="dark:text-white">
+                {updatedEvents.length} assignments edited
+              </p>
+            )}
+          </section>
+          {/* <button onClick={() => onHandleRefreshDueDates()}>
               Refresh Due Dates
             </button> */}
 
-            <div>
-              {events &&
-                events.length > 0 &&
-                events.map((event) =>
-                  !event.completed ? (
-                    <EventComponent
-                      key={event._id}
-                      id={event._id}
-                      name={event.name}
-                      dateTime={event.dueDate}
-                      difficulty={event.difficulty}
-                      type={event.type}
-                      reminders={event.reminders}
-                      onUpdateDifficultyAndType={onUpdateDifficultyAndType}
-                    />
-                  ) : null
-                )}
-              {!events ||
-                (events.length === 0 && (
-                  <p className="text-center">No assignments found</p>
-                ))}
-            </div>
-          </main>
+          <div>
+            {events &&
+              events.length > 0 &&
+              events.map((event) =>
+                !event.completed ? (
+                  <EventComponent
+                    key={event._id}
+                    id={event._id}
+                    name={event.name}
+                    dateTime={event.dueDate}
+                    difficulty={event.difficulty}
+                    type={event.type}
+                    reminders={event.reminders}
+                    onUpdateDifficultyAndType={onUpdateDifficultyAndType}
+                  />
+                ) : null
+              )}
+            {!events ||
+              (events.length === 0 && (
+                <p className="text-center">No assignments found</p>
+              ))}
+          </div>
         </div>
       )}
       <Footer />

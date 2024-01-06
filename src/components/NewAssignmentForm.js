@@ -105,7 +105,7 @@ const NewAssignmentForm = ({ onFormSubmit }) => {
   }, []);
 
   return (
-    <div className="flex justify-center items-center w-full m-10 mt-10 md:mt-20">
+    <div className="flex justify-center items-center flex-grow p-10">
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <form
           onSubmit={handleSubmit}
