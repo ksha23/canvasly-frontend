@@ -10,6 +10,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material/styles";
 import applyTheme from "../utils/colorThemeHandler";
+import Slider from "@mui/material/Slider";
 
 const darkTheme = createTheme({
   palette: {
@@ -22,6 +23,53 @@ const lightTheme = createTheme({
     mode: "light",
   },
 });
+
+const marks = [
+  {
+    value: 0,
+    label: "0",
+  },
+  {
+    value: 1,
+    label: "1",
+  },
+  {
+    value: 2,
+    label: "2",
+  },
+  {
+    value: 3,
+    label: "3",
+  },
+  {
+    value: 4,
+    label: "4",
+  },
+  {
+    value: 5,
+    label: "5",
+  },
+  {
+    value: 6,
+    label: "6",
+  },
+  {
+    value: 7,
+    label: "7",
+  },
+  {
+    value: 8,
+    label: "8",
+  },
+  {
+    value: 9,
+    label: "9",
+  },
+  {
+    value: 10,
+    label: "10",
+  },
+];
 
 const SettingsForm = () => {
   // ------------------ Form State ----------------------
@@ -117,7 +165,7 @@ const SettingsForm = () => {
   return (
     <div>
       {userData && calendarData && (
-        <div className="rounded-md">
+        <div className="rounded-md p-5 pt-2">
           <form onSubmit={handleSubmit}>
             <p className="mb-2 font-semibold">
               Choose a calendar to display events from:
@@ -143,42 +191,53 @@ const SettingsForm = () => {
                   ))}
                 </Select>
               )}
-            </ThemeProvider>
-            <p className="mt-4 font-semibold">Choose weights for sorting:</p>
-            <div className="grid grid-cols-3 gap-4 mt-2">
+              <p className="mt-4 font-semibold mb-4">
+                Choose weights for sorting:
+              </p>
               <div>
                 <label htmlFor="dueDateWeight">Due date:</label>
-                <input
+                <Slider
                   id="dueDateWeight"
-                  type="number"
                   value={dueDateWeight}
-                  onChange={(e) => setDueDateWeight(e.target.value)}
-                  className="block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 px-2 py-2 mt-2 text-center dark:bg-zinc-600"
+                  onChange={(e, value) => setDueDateWeight(value)}
+                  step={1}
+                  marks={marks}
+                  min={0}
+                  max={10}
+                  className="w-full mt-2 text-violet-600"
+                  valueLabelDisplay="auto"
                 />
               </div>
-
               <div>
-                <label htmlFor="typeWeight">Type</label>
-                <input
+                <label htmlFor="typeWeight">Type:</label>
+                <Slider
                   id="typeWeight"
-                  type="number"
                   value={typeWeight}
-                  onChange={(e) => setTypeWeight(e.target.value)}
-                  className="block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 px-2 py-2 mt-2 text-center dark:bg-zinc-600"
+                  onChange={(e, value) => setTypeWeight(value)}
+                  step={1}
+                  marks={marks}
+                  min={0}
+                  max={10}
+                  className="w-full mt-2 text-violet-600"
+                  valueLabelDisplay="auto"
                 />
               </div>
-
               <div>
                 <label htmlFor="difficultyWeight">Difficulty:</label>
-                <input
+                <Slider
                   id="difficultyWeight"
-                  type="number"
                   value={difficultyWeight}
-                  onChange={(e) => setDifficultyWeight(e.target.value)}
-                  className="block w-full rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 px-2 py-2 mt-2 text-center dark:bg-zinc-600"
+                  onChange={(e, value) => setDifficultyWeight(value)}
+                  step={1}
+                  marks={marks}
+                  min={0}
+                  max={10}
+                  className="w-full mt-2 text-violet-600"
+                  valueLabelDisplay="auto"
+                  // color="#7C3AED"
                 />
               </div>
-            </div>
+            </ThemeProvider>
             <p className="mt-4 font-semibold">Choose a color theme:</p>
             <div className="grid grid-cols-1 md:grid-cols-3 mt-2 gap-4">
               <button
@@ -204,8 +263,8 @@ const SettingsForm = () => {
               </button>
             </div>
 
-            {error && <div className="text-red-500">{error}</div>}
-            <button className="mt-4 bg-violet-600 hover:bg-violet-700 text-white py-2 px-4 rounded">
+            {error && <div className="text-red-500 mt-2">{error}</div>}
+            <button className="mt-6 bg-violet-600 hover:bg-violet-700 text-white py-2 px-4 rounded">
               Save Settings
             </button>
           </form>

@@ -13,6 +13,7 @@ import TextAreaAutoSize from "react-textarea-autosize";
 
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import Slider from "@mui/material/Slider";
 import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material/styles";
 import applyTheme from "../utils/colorThemeHandler";
@@ -28,6 +29,29 @@ const lightTheme = createTheme({
     mode: "light",
   },
 });
+
+const marks = [
+  {
+    value: 1,
+    label: "Easy",
+  },
+  {
+    value: 2,
+    label: "",
+  },
+  {
+    value: 3,
+    label: "Normal",
+  },
+  {
+    value: 4,
+    label: "",
+  },
+  {
+    value: 5,
+    label: "Hard",
+  },
+];
 
 const EventComponent = ({
   id,
@@ -257,12 +281,12 @@ const EventComponent = ({
         </p>
 
         {/* Difficulty and Type */}
-        <div className="md:flex md:items-center">
-          <div className="flex justify-between md:justify-normal">
+        <div className="items-center p-2">
+          <div className="flex justify-between">
             <ThemeProvider
               theme={theColorTheme === "dark" ? darkTheme : lightTheme}
             >
-              <Select
+              {/* <Select
                 className="mr-2 bg-white rounded text-sm w-1/2 mt-2 dark:text-white dark:bg-zinc-700 md:w-auto"
                 value={theDifficulty}
                 onChange={(e) => {
@@ -274,9 +298,19 @@ const EventComponent = ({
                 <MenuItem value="3">Difficulty 3</MenuItem>
                 <MenuItem value="4">Difficulty 4</MenuItem>
                 <MenuItem value="5">Difficulty 5</MenuItem>
-              </Select>
+              </Select> */}
+              <Slider
+                value={theDifficulty}
+                onChange={(e, value) => handleEdited(id, value, theType)}
+                step={1}
+                marks={marks}
+                min={1}
+                max={5}
+                valueLabelDisplay="off"
+                className="ml-1 w-1/2 mt-2 text-white mr-8 md:ml-4"
+              />
               <Select
-                className="mr-2 bg-white rounded text-sm w-1/2 mt-2 dark:text-white dark:bg-zinc-700 md:w-auto"
+                className="bg-white rounded text-sm w-1/2 mt-2 dark:text-white dark:bg-zinc-700"
                 value={theType}
                 onChange={(e) => {
                   handleEdited(id, theDifficulty, e.target.value);
@@ -292,10 +326,10 @@ const EventComponent = ({
           </div>
 
           {/* Update and Undo Buttons */}
-          <div className="">
+          <div>
             {edited && (
               <button
-                className="bg-green-600 text-white px-4 py-2 rounded-md text-sm sm: mt-2"
+                className="bg-green-600 text-white px-4 py-2 rounded-md text-sm sm: mt-4"
                 onClick={() =>
                   handleUpdateButtonClick(id, theDifficulty, theType)
                 }
@@ -305,7 +339,7 @@ const EventComponent = ({
             )}
             {edited && (
               <button
-                className="mr-2 bg-red-500 text-white px-4 py-2 rounded-md ml-2 text-sm sm: mt-2"
+                className="bg-red-500 text-white px-4 py-2 rounded-md ml-3 text-sm sm: mt-4"
                 onClick={() => undoAllChanges()}
               >
                 Undo
