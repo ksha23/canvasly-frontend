@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import applyTheme from "../utils/colorThemeHandler";
 
 const PrivacyPolicyPage = () => {
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", (event) => {
+      applyTheme(); // Update the theme when the preference changes
+    });
+
   return (
     <div className="flex flex-col dark:bg-black dark:text-white min-h-screen">
       <Navbar />
