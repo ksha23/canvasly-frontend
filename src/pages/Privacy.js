@@ -10,6 +10,10 @@ const PrivacyPolicyPage = () => {
       applyTheme(); // Update the theme when the preference changes
     });
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="flex flex-col dark:bg-black dark:text-white min-h-screen">
       <Navbar />
