@@ -37,7 +37,7 @@ const HomePage = () => {
           </ul>
         </div>
 
-        <div className="mb-12">
+        <div>
           <h2 className="text-2xl font-bold mb-4 text-purple-600">
             How to Get Started:
           </h2>
