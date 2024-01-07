@@ -5,13 +5,16 @@ import App from "./App";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import { StyledEngineProvider } from "@mui/material";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <StyledEngineProvider injectFirst>
       <Provider store={store}>
-        <App />
+        <GoogleOAuthProvider clientId="628732787503-gqfknfu4fmd33nj7pfkjrra2vfiksh0a.apps.googleusercontent.com">
+          <App />
+        </GoogleOAuthProvider>
       </Provider>
     </StyledEngineProvider>
   </React.StrictMode>

@@ -1,12 +1,11 @@
 import { useEffect } from "react";
-
 import { useNavigate, Link, useLocation } from "react-router-dom";
-
 import { useDispatch, useSelector } from "react-redux";
 import { RESET, GET_CALENDAR_DATA } from "../redux/constant";
 import { setIsLoggedIn } from "../redux/actions/loginActions";
 import { fetchUserData } from "../redux/actions/userActions";
 import { getAssignments } from "../redux/actions/assignmentListActions";
+import { useGoogleLogin } from "@react-oauth/google";
 
 const Navbar = () => {
   var userData = useSelector((state) => state.userDataReducer);
@@ -36,9 +35,25 @@ const Navbar = () => {
 
   // ------------------ Authentication --------------
 
-  async function auth() {
-    window.open(`${process.env.REACT_APP_API_URL}/api/v1/auth/google`, "_self");
-  }
+  // async function auth() {
+  //   window.open(`${process.env.REACT_APP_API_URL}/api/v1/auth/google`, "_self");
+  // }
+
+  // another way to do this
+  const auth = useGoogleLogin({
+    onSuccess: () => {
+      // this will never be called because we are using ux_mode: "redirect"
+    },
+    onNonOAuthError: (response) => {
+      console.error("Login failed", response);
+    },
+    onFailure: (response) => {
+      console.error("Login failed", response);
+    },
+    ux_mode: "redirect",
+    redirect_uri: `${process.env.REACT_APP_API_URL}/api/v1/auth/google/redirect`,
+    flow: "auth-code",
+  });
 
   async function logout() {
     const response = await fetch(
@@ -57,68 +72,70 @@ const Navbar = () => {
   }
 
   return (
-    <header className="py-4 px-6 sticky top-0 z-50 bg-white dark:bg-black">
-      <div className="mx-auto flex justify-between items-center">
-        <div className="flex items-center space-x-3 md:space-x-4">
-          <Link to="/">
-            <img
-              className="h-8 w-8 md:h-10 md:w-10"
-              src={process.env.PUBLIC_URL + "/canvasly.svg"}
-              alt="Logo"
-            />
-          </Link>
-          {!isLoggedIn && <p>CanvasLy</p>}
-          {isLoggedIn && (
-            <Link
-              to="/assignments"
-              className={`text-black text-s md:text-base dark:text-white ${isActiveLink(
-                "/assignments"
-              )}`}
-            >
-              Assignments
-            </Link>
-          )}
-          {isLoggedIn && (
-            <Link
-              to="/settings"
-              className={`text-black text-s md:text-base dark:text-white ${isActiveLink(
-                "/settings"
-              )}`}
-            >
-              Settings
-            </Link>
-          )}
-        </div>
-        <div className="flex items-center">
-          <div className="user-profile">
-            {isLoggedIn && userData && (
+    <>
+      <header className="py-4 px-6 sticky top-0 z-50 bg-white dark:bg-black">
+        <div className="mx-auto flex justify-between items-center">
+          <div className="flex items-center space-x-3 md:space-x-4">
+            <Link to="/">
               <img
-                className="h-8 w-8 rounded-full"
-                src={userData.photo}
-                alt="Profile"
+                className="h-8 w-8 md:h-10 md:w-10"
+                src={process.env.PUBLIC_URL + "/canvasly.svg"}
+                alt="Logo"
               />
+            </Link>
+            {!isLoggedIn && <p>CanvasLy</p>}
+            {isLoggedIn && (
+              <Link
+                to="/assignments"
+                className={`text-black text-s md:text-base dark:text-white ${isActiveLink(
+                  "/assignments"
+                )}`}
+              >
+                Assignments
+              </Link>
+            )}
+            {isLoggedIn && (
+              <Link
+                to="/settings"
+                className={`text-black text-s md:text-base dark:text-white ${isActiveLink(
+                  "/settings"
+                )}`}
+              >
+                Settings
+              </Link>
             )}
           </div>
-          {!isLoggedIn && (
-            <button className="px-1 py-1 rounded-md" onClick={() => auth()}>
-              <img
-                className="h-7 md:h-8"
-                src={process.env.PUBLIC_URL + "/sign-in2.png"}
-                alt="Sign In"
-              />
-            </button>
-          )}
-          {isLoggedIn && (
-            <button
-              className="rounded-md text-black text-sm pl-2 dark:text-white"
-              onClick={() => logout()}
-            >
-              Log Out
-            </button>
-          )}
+          <div className="flex items-center">
+            <div className="user-profile">
+              {isLoggedIn && userData && (
+                <img
+                  className="h-8 w-8 rounded-full"
+                  src={userData.photo}
+                  alt="Profile"
+                />
+              )}
+            </div>
+            {!isLoggedIn && (
+              <button className="px-1 py-1 rounded-md" onClick={() => auth()}>
+                <img
+                  className="h-7 md:h-8"
+                  src={process.env.PUBLIC_URL + "/sign-in2.png"}
+                  alt="Sign In"
+                />
+              </button>
+            )}
+            {isLoggedIn && (
+              <button
+                className="rounded-md text-black text-sm pl-2 dark:text-white"
+                onClick={() => logout()}
+              >
+                Log Out
+              </button>
+            )}
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+    </>
   );
 };
 

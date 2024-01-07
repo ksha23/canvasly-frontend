@@ -1,4 +1,4 @@
-import { put, take, takeEvery } from "redux-saga/effects";
+import { put, takeEvery } from "redux-saga/effects";
 import { GET_ASSIGNMENTS } from "../constant";
 
 // worker saga
